@@ -1,0 +1,23 @@
+{
+  "name": "weave",
+  "version": "1.0.0",
+  "description": "Vetted design patterns for common usability issues, reusable components for rapid development, and an accessible design system as a single source of truth for consistency",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stitchfix/weave.git"
+  },
+  "keywords": [
+    "weave",
+    "stitchfix"
+  ],
+  "author": "Stitchfix",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stitchfix/weave/issues"
+  },
+  "homepage": "https://github.com/stitchfix/weave#readme"
+}
