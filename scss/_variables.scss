@@ -1,0 +1,404 @@
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+/* Global
+------------------------------------------------------------------------------*/
+
+$size-names: xxxl, xxl, xl, lg, md, sm, xs, xxs, xxxs;
+$common-size-names: xl, lg, md, sm, xs;
+
+$size-name-map: (
+  xxxl: "extra-extra-extra-large",
+  xxl:  "extra-extra-large",
+  xl:   "extra-large",
+  lg:   "large",
+  md:   "medium",
+  sm:   "small",
+  xs:   "extra-small",
+  xxs:  "extra-extra-small",
+  xxxs: "extra-extra-extra-small",
+);
+
+// The unit of measurement we want to stick to
+// More technically, the base rem unit we share throughout
+$base-visual-rhythm: 8px default;
+
+/* Colors
+------------------------------------------------------------------------------*/
+
+// Brand colors
+$color--mint-dark:           #00A19A default;
+$color--mint:                #00BDB4 default;
+$color--mint-lightest:       #DDF8F7 default;
+$color--watermelon:          #F05D61 default;
+$color--watermelon-light:    #F6A2A4 default;
+$color--watermelon-lightest: #FFCDD2 default;
+
+// UI colors
+$color--blue:         #2F8AB6 default;
+$color--yellow:       #FFEE7E default;
+$color--yellow-light: #FFFAD6 default;
+$color--gray-dark:    #303030 default;
+$color--gray:         #727272 default;
+$color--gray-light:   #D5D5D5 default;
+$color--gray-lighter: #F7F7F7 default;
+$color--white:        #FFFFFF default;
+
+// Secondary colors
+$color--secondary--cyan:        #F05D61 default;
+$color--secondary--pink:        #00A19A default;
+$color--secondary--amber:       #2F3237 default;
+$color--secondary--deep-orange: #FFCDD2 default;
+$color--secondary--lime:        #B2DFDB default;
+$color--secondary--deep-purple: #2F3237 default;
+
+// Transparency colors
+$transparent--black-75: rgba(0, 0, 0, 0.75) default;
+$transparent--black-50: rgba(0, 0, 0, 0.50) default;
+$transparent--black-25: rgba(0, 0, 0, 0.25) default;
+$transparent--black-10: rgba(0, 0, 0, 0.10) default;
+
+$toast-bg:         $transparent--black-75 default;
+$snackbar-bg:      $transparent--black-75 default;
+$modal-overlay:    $transparent--black-50 default;
+$calendar-overlay: $transparent--black-25 default;
+
+/* Viewports
+------------------------------------------------------------------------------*/
+
+// Map of breakpoints upper and lower bounds and base font size
+$breakpoint-map: (
+  xs: (
+    min-width: 0,
+    max-width: 599px,
+    base-font: 12px
+  ),
+  sm: (
+    min-width: 600px,
+    max-width: 767px,
+    base-font: 14px
+  ),
+  md: (
+    min-width: 768px,
+    max-width: 991px,
+    base-font: 14px
+  ),
+  lg: (
+    min-width: 992px,
+    max-width: 1199px,
+    base-font: 16px
+  ),
+  xl: (
+    min-width: 1200px,
+    max-width: null,
+    base-font: 16px
+  )
+);
+
+// For convenience, breakpoint variables
+$breakpoint-min-xs: map-deep-get($breakpoint-map, xs, min-width);
+$breakpoint-min-sm: map-deep-get($breakpoint-map, sm, min-width);
+$breakpoint-min-md: map-deep-get($breakpoint-map, md, min-width);
+$breakpoint-min-lg: map-deep-get($breakpoint-map, lg, min-width);
+$breakpoint-min-xl: map-deep-get($breakpoint-map, xl, min-width);
+
+$breakpoint-max-xs: map-deep-get($breakpoint-map, xs, max-width);
+$breakpoint-max-sm: map-deep-get($breakpoint-map, sm, max-width);
+$breakpoint-max-md: map-deep-get($breakpoint-map, md, max-width);
+$breakpoint-max-lg: map-deep-get($breakpoint-map, lg, max-width);
+$breakpoint-max-xl: map-deep-get($breakpoint-map, xl, max-width);
+
+$breakpoint-base-font-xs: map-deep-get($breakpoint-map, xs, base-font);
+$breakpoint-base-font-sm: map-deep-get($breakpoint-map, sm, base-font);
+$breakpoint-base-font-md: map-deep-get($breakpoint-map, md, base-font);
+$breakpoint-base-font-lg: map-deep-get($breakpoint-map, lg, base-font);
+$breakpoint-base-font-xl: map-deep-get($breakpoint-map, xl, base-font);
+
+@mixin viewport-at($breakpoint) {
+  @if map-has-key($breakpoint-map, $breakpoint) {
+    $viewport-at__min-width: map-deep-get($breakpoint-map, $breakpoint, min-width);
+    $viewport-at__max-width: map-deep-get($breakpoint-map, $breakpoint, max-width);
+    @if ($viewport-at__max-width == null) {
+      @media screen and (min-width: $viewport-at__min-width) {
+        @content;
+      }
+    }
+    @else {
+      @media screen and (min-width: $viewport-at__min-width) and (max-width: $viewport-at__max-width) {
+        @content;
+      }
+    }
+  }
+
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+@mixin viewport-equal-to-and-smaller-than($breakpoint) {
+  @if map-has-key($breakpoint-map, $breakpoint) {
+    $equal-to-and-smaller-than: map-deep-get($breakpoint-map, $breakpoint, max-width);
+    @if ($equal-to-and-smaller-than == null) {
+      @content;
+    }
+    @else {
+      @media screen and (max-width: $equal-to-and-smaller-than) {
+        @content;
+      }
+    }
+  }
+
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+@mixin viewport-equal-to-and-larger-than($breakpoint) {
+  @if map-has-key($breakpoint-map, $breakpoint) {
+    $equal-to-and-larger-than: map-deep-get($breakpoint-map, $breakpoint, min-width);
+    @if ($equal-to-and-larger-than == 0) {
+      @content;
+    }
+    @else {
+      @media screen and (min-width: $equal-to-and-larger-than) {
+        @content;
+      }
+    }
+  }
+
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+
+.breakpoint-test {
+  @include viewport-at(xl){
+    &:after {
+      content: "xl";
+    }
+  }
+  @include viewport-at(lg){
+    &:after {
+      content: "lg";
+    }
+  }
+  @include viewport-at(md){
+    &:after {
+      content: "md";
+    }
+  }
+  @include viewport-at(sm){
+    &:after {
+      content: "sm";
+    }
+  }
+  @include viewport-at(xs){
+    &:after {
+      content: "xs";
+    }
+  }
+}
+
+/* UI
+------------------------------------------------------------------------------*/
+$ui--accent:             $color--mint;
+$ui--accent--under-text: $color--mint-dark;
+
+$success--color: $color--mint;
+$error--color:   $color--watermelon;
+$warning--color: $color--yellow;
+
+$field--success: $color--mint;
+$field--error:   $color--watermelon;
+$field--info:    $color--mint-lightest;
+$field--warning: $color--yellow;
+
+$disabled-opacity: 0.5;
+
+$border--default: $color--gray-light;
+$rule--default:   $color--gray-light;
+$border--error:   $color--watermelon;
+$rule--error:     $color--watermelon;
+$border--success: $color--mint;
+$rule--success:   $color--mint;
+
+$rounded--default:        2px;
+$rounded--perfect-circle: 100%;
+
+// Typography
+$text--primary:   $color--gray-dark;
+$text--secondary: $color--gray;
+$text--light:     $color--white;
+$text--error:     $color--watermelon;
+$text--success:   $color--mint-dark;
+$text--warning:   $color--yellow;
+
+$base-pixel-size-unit:  4px;
+$base-line-height-unit: 8px;
+
+$type-face--default: 'Whitney SSm Book';
+$text--xxl:  100px;
+$text--xl:   64px;
+$text--f1:   54px;
+$text--f2:   46px;
+$text--f3:   36px;
+$text--f4:   31px;
+$text--f5:   25px;
+$text--f6:   20px;
+$text--md:   16px;
+$text--sm:   14px;
+$text--xs:   12px;
+$text--xxs:  10px;
+$text--xxxs: 8px;
+
+// $text--xxl:  6.25em;
+// $text--xl:   4em;
+// $text--f1:   3.375em;
+// $text--f2:   2.875em;
+// $text--f3:   2.25em;
+// $text--f4:   1.9375em;
+// $text--f5:   1.5625em;
+// $text--f6:   1.25em;
+// $text--md:   1em;
+// $text--sm:   0.875em;
+// $text--xs:   0.75em;
+// $text--xxs:  0.625em;
+// $text--xxxs: 0.5em;
+
+$text--xxl__line-height:  168px;
+$text--xl__line-height:   112px;
+$text--f1__line-height:   96px;
+$text--f2__line-height:   80px;
+$text--f3__line-height:   64px;
+$text--f4__line-height:   56px;
+$text--f5__line-height:   48px;
+$text--f6__line-height:   40px;
+$text--md__line-height:   32px;
+$text--sm__line-height:   24px;
+$text--xs__line-height:   24px;
+$text--xxs__line-height:  24px; // 16px instead?
+$text--xxxs__line-height: 16px;
+
+// $text--xxl__line-height:  1.66em;
+// $text--xl__line-height:   1.66em;
+// $text--f1__line-height:   1.66em;
+// $text--f2__line-height:   1.66em;
+// $text--f3__line-height:   1.66em;
+// $text--f4__line-height:   1.66em;
+// $text--f5__line-height:   1.66em;
+// $text--f6__line-height:   1.66em;
+// $text--md__line-height:   1.66em;
+// $text--sm__line-height:   1.66em;
+// $text--xs__line-height:   1.66em;
+// $text--xxs__line-height:  1.66em;
+// $text--xxxs__line-height: 1.66em;
+
+$paragraph-text: $text--md;
+
+// Grid
+
+$grid--gutter-size: 16px;
+$grid--max-columns: 12;
+
+// Layout
+$padding-base-unit: 4px;
+$margin-base-unit:  4px;
+$padding-xxl: 64px;
+$padding-xl:  32px;
+$padding-lg:  24px;
+$padding-md:  16px;
+$padding-sm:  8px;
+$padding-xs:  4px;
+$padding-xxs: 2px;
+
+$margin-xxl: 104px;
+$margin-xl:  64px;
+$margin-lg:  32px;
+$margin-md:  16px;
+$margin-sm:  8px;
+$margin-xs:  4px;
+$margin-xxs: 2px;
+
+
+$inset__xl:  $padding-xl;
+$inset__lg:  $padding-lg;
+$inset__md:  $padding-md;
+$inset__sm:  $padding-sm;
+$inset__xs:  $padding-xs;
+$inset__xxs: $padding-xxs;
+
+$stack__xl:  $margin-xl;
+$stack__lg:  $margin-lg;
+$stack__md:  $margin-md;
+$stack__sm:  $margin-sm;
+$stack__xs:  $margin-xs;
+$stack__xxs: $margin-xxs;
+
+$inline__md: $margin-md;
+$inline__sm: $margin-sm;
+$inline__xs: $margin-xs;
+
+// Depth & Shadows
+$z-depth--0__index: 1;
+$z-depth--1__index: 2;
+$z-depth--2__index: 4;
+$z-depth--3__index: 8;
+$z-depth--4__index: 16;
+$z-depth--5__index: 32;
+
+$z-depth--0__shadow: 0 0 0 rgba(0,0,0,0.0); //no shadow
+$z-depth--1__shadow: 0 2px 5px rgba(0,0,0,0.16),  0 2px 10px rgba(0,0,0,0.12);
+$z-depth--2__shadow: 0 8px 17px rgba(0,0,0,0.16), 0 6px 20px rgba(0,0,0,0.19);
+$z-depth--3__shadow: 0 12px 15px rgba(0,0,0,0.24), 0 17px 50px rgba(0,0,0,0.19);
+$z-depth--4__shadow: 0 16px 28px rgba(0,0,0,0.22), 0 25px 55px rgba(0,0,0,0.21);
+$z-depth--5__shadow: 0 27px 24px rgba(0,0,0,0.20), 0 40px 77px rgba(0,0,0,0.22);
+
+// Transitions
+$transition__speed--default: 0.4s;
+$transition__speed--fast:    0.2s;
+$transition__speed--slow:    0.8s;
+$transition__easing--default: ease-in-out;
+$transition__easing--complex: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+// Links
+$link-color: $color--blue;
+
+// Buttons
+$button--primary:   $color--blue;
+$button--secondary: $color--white;
+$button--flat:      transparent;
+$button--cta:       $color--watermelon;
+$button--primary__text-color: $text--light;
+$button--secondary-color:     $text--primary;
+$button--flat__text-color:    $link-color;
+$button__shadow:         0 2px 3px rgba(0,0,0,0.23);
+$button--active__shadow: $z-depth--1__shadow;
+
+// Forms
+$form--label__text-color:         $text--secondary;
+$form--label__text-color--error:  $error--color;
+$form--label__text-color--active: $success--color;
+$form--help__text-color:          $text--secondary;
+$form--help__text-color--error:   $error--color;
+$form--input-rule:                $rule--default;
+$form--input-rule--error:         $rule--error;
+$form--input-rule--active:        $rule--success;
+
+$form--input__text-color:              $text--primary;
+$form--input__text-color--active:      $text--primary;
+$form--input__text-color--placeholder: $transparent--black-25;
+
+// Cards
+$card__inset: $padding-md $padding-lg;
+$card__outset: $margin-md;
+$card-border--default: 1px solid $color--gray-lighter;
+$card-min-width: 300px;
+$card-max-width: 440px;

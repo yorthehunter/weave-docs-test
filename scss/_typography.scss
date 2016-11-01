@@ -1,0 +1,260 @@
+%f-xxxs,
+.f-xxxs {
+  font-size: $text--xxxs;
+  line-height: $text--xxxs__line-height;
+}
+
+%f-xxs,
+.f-xxs {
+  font-size: $text--xxs;
+  line-height: $text--xxs__line-height;
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: $text--xxxs;
+    line-height: $text--xxxs__line-height;
+  }
+}
+
+%f-xs,
+.f-xs {
+  font-size: $text--xs;
+  line-height: $text--xs__line-height;
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: $text--xxs;
+    line-height: $text--xxs__line-height;
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: $text--xxxs;
+    line-height: $text--xxxs__line-height;
+  }
+}
+
+%f-sm,
+.f-sm {
+  font-size: $text--sm;
+  line-height: $text--sm__line-height;
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: $text--xs;
+    line-height: $text--xs__line-height;
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: $text--xxs;
+    line-height: $text--xxs__line-height;
+  }
+}
+
+%f-md,
+.f-md {
+  font-size: $text--md;
+  line-height: $text--md__line-height;
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: $text--sm;
+    line-height: $text--sm__line-height;
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: $text--xs;
+    line-height: $text--xs__line-height;
+  }
+}
+
+%f6,
+.f6 {
+  font-size: $text--f6;
+  line-height: $text--f6__line-height;
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: $text--md;
+    line-height: $text--md__line-height;
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: $text--sm;
+    line-height: $text--sm__line-height;
+  }
+}
+
+%f5,
+.f5 {
+  font-size: $text--f5;
+  line-height: $text--f5__line-height;
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: $text--f6;
+    line-height: $text--f6__line-height;
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: $text--md;
+    line-height: $text--md__line-height;
+  }
+}
+
+%f4,
+.f4 {
+  font-size: $text--f4;
+  line-height: $text--f4__line-height;
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: $text--f5;
+    line-height: $text--f5__line-height;
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: $text--f6;
+    line-height: $text--f6__line-height;
+  }
+}
+
+%f3,
+.f3 {
+  font-size: $text--f3;
+  line-height: $text--f3__line-height;
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: $text--f4;
+    line-height: $text--f4__line-height;
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: $text--f5;
+    line-height: $text--f5__line-height;
+  }
+}
+
+%f2,
+.f2 {
+  font-size: $text--f2;
+  line-height: $text--f2__line-height;
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: $text--f3;
+    line-height: $text--f3__line-height;
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: $text--f4;
+    line-height: $text--f4__line-height;
+  }
+}
+
+%f1,
+.f1 {
+  font-size: $text--f1;
+  line-height: $text--f1__line-height;
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: $text--f2;
+    line-height: $text--f2__line-height;
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: $text--f3;
+    line-height: $text--f3__line-height;
+  }
+}
+
+%f-xl,
+.f-xl {
+  font-size: $text--xl;
+  line-height: $text--xl__line-height;
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: $text--f1;
+    line-height: $text--f1__line-height;
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: $text--f2;
+    line-height: $text--f2__line-height;
+  }
+}
+
+%f-xxl,
+.f-xxl {
+  font-size: $text--xxl;
+  line-height: $text--xxl__line-height;
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: $text--xl;
+    line-height: $text--xl__line-height;
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: $text--f1;
+    line-height: $text--f1__line-height;
+  }
+}
+
+// Basic Setup
+html {
+  font-size: $base-visual-rhythm;
+}
+
+body {
+  font-family: "Whitney", helvetica, sans-serif;
+  color: $text--primary;
+
+  @include viewport-at(xl){
+    font-size: $breakpoint-base-font-xl;
+  }
+
+  @include viewport-at(lg){
+    font-size: $breakpoint-base-font-lg;
+  }
+
+  @include viewport-at(md){
+    font-size: $breakpoint-base-font-md;
+  }
+
+  @include viewport-at(sm){
+    font-size: $breakpoint-base-font-sm;
+  }
+
+  @include viewport-at(xs){
+    font-size: $breakpoint-base-font-xs;
+  }
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+%h1,
+.h1 {
+  @extend %f1 !optional;
+}
+
+%h2,
+.h2 {
+  @extend %f2 !optional;
+}
+
+%h3,
+.h3 {
+  @extend %f3 !optional;
+}
+
+%h4,
+.h4 {
+  @extend %f4 !optional;
+}
+
+%h5,
+.h5 {
+  @extend %f5 !optional;
+}
+
+%h6,
+.h6 {
+  @extend %f6 !optional;
+}
+
+p {
+  @extend %f-md !optional;
+}

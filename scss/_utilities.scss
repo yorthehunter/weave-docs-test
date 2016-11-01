@@ -1,0 +1,24 @@
+
+// Classic clearfix: clears child elements, typically floats.
+// Please limit the use of this as it isn't as necessary as it once was
+%u-clearfix,
+.u-clearfix {
+  &:before, &:after { content: " "; display: table; }
+  &:after { clear: both; }
+}
+
+// Block elements (like <div>) are full width by default. Be sure you're not
+// overriding anything important when using this.
+%u-full-width,
+.u-full-width{
+  width: 100% !important;
+}
+
+@include viewport-at(xs) {
+  %u-full-width--xs,
+  .u-full-width--xs {
+    width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
