@@ -1,0 +1,15 @@
+{
+  "name": "weave",
+  "version": "0.1.0",
+  "main": [
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "test"
+  ]
+}

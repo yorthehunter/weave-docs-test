@@ -1,6 +1,6 @@
 {
   "name": "weave",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Vetted design patterns for common usability issues, reusable components for rapid development, and an accessible design system as a single source of truth for consistency",
   "main": "index.js",
   "scripts": {
