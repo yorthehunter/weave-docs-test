@@ -112,6 +112,28 @@ abbr[title] {
 }
 
 /**
+ * Reset some basic typography & list styles
+ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: normal;
+}
+
+ul,
+ol {
+  margin-top: 0;
+  padding-left: 2rem;
+}
+
+/**
  * Prevent the duplicate application of `bolder` by the next rule in Safari 6.
  */
 
@@ -163,7 +185,7 @@ mark {
  */
 
 small {
-  font-size: 80%;
+  font-size: .75em;
 }
 
 /**

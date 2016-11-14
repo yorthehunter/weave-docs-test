@@ -2,7 +2,7 @@
 
 $container-padding: 1rem;
 
-.container {
+.#{$wv}-container {
   @extend %clearfix !optional;
   margin-left:  auto;
   margin-right: auto;

@@ -14,11 +14,30 @@
   width: 100% !important;
 }
 
+// Force full-width on an element for xs viewports
 @include viewport-at(xs) {
   %u-full-width--xs,
   .u-full-width--xs {
     width: 100%;
     margin-left: 0 !important;
     margin-right: 0 !important;
+  }
+}
+
+// inset, stack, and inline spacing utilities
+@each $size in $size-names {
+  %u-inset--#{$size},
+  .u-inset--#{$size} {
+    padding: map-get($inset-map, #{$size});
+  }
+
+  %u-stack--#{$size},
+  .u-stack--#{$size} {
+    margin-bottom: map-get($stack-map, #{$size});
+  }
+
+  %u-inline--#{$size},
+  .u-inline--#{$size} {
+    margin-right: map-get($inline-map, #{$size});
   }
 }

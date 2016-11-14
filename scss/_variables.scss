@@ -8,7 +8,10 @@
 /* Global
 ------------------------------------------------------------------------------*/
 
-$size-names: xxxl, xxl, xl, lg, md, sm, xs, xxs, xxxs;
+// Namespace variable
+$wv: "weave";
+
+$size-names: xxxl, xxl, xl, lg, md, sm, xs, xxs, xxxs, "none";
 $common-size-names: xl, lg, md, sm, xs;
 
 $size-name-map: (
@@ -25,47 +28,48 @@ $size-name-map: (
 
 // The unit of measurement we want to stick to
 // More technically, the base rem unit we share throughout
-$base-visual-rhythm: 8px default;
+$base-visual-rhythm: 8px !default;
 
 /* Colors
 ------------------------------------------------------------------------------*/
 
 // Brand colors
-$color--mint-dark:           #00A19A default;
-$color--mint:                #00BDB4 default;
-$color--mint-lightest:       #DDF8F7 default;
-$color--watermelon:          #F05D61 default;
-$color--watermelon-light:    #F6A2A4 default;
-$color--watermelon-lightest: #FFCDD2 default;
+$color--mint-dark:           #00A19A !default;
+$color--mint:                #00BDB4 !default;
+$color--mint-lightest:       #DDF8F7 !default;
+$color--watermelon:          #F05D61 !default;
+$color--watermelon-light:    #F6A2A4 !default;
+$color--watermelon-lightest: #FFCDD2 !default;
 
 // UI colors
-$color--blue:         #2F8AB6 default;
-$color--yellow:       #FFEE7E default;
-$color--yellow-light: #FFFAD6 default;
-$color--gray-dark:    #303030 default;
-$color--gray:         #727272 default;
-$color--gray-light:   #D5D5D5 default;
-$color--gray-lighter: #F7F7F7 default;
-$color--white:        #FFFFFF default;
+$color--blue:         #2F8AB6 !default;
+$color--yellow:       #FFEE7E !default;
+$color--yellow-light: #FFFAD6 !default;
+$color--gray-dark:    #303030 !default;
+$color--gray:         #727272 !default;
+$color--gray-light:   #D5D5D5 !default;
+$color--gray-lighter: #F7F7F7 !default;
+$color--white:        #FFFFFF !default;
 
 // Secondary colors
-$color--secondary--cyan:        #F05D61 default;
-$color--secondary--pink:        #00A19A default;
-$color--secondary--amber:       #2F3237 default;
-$color--secondary--deep-orange: #FFCDD2 default;
-$color--secondary--lime:        #B2DFDB default;
-$color--secondary--deep-purple: #2F3237 default;
+$color--secondary--cyan:        #F05D61 !default;
+$color--secondary--pink:        #00A19A !default;
+$color--secondary--amber:       #2F3237 !default;
+$color--secondary--deep-orange: #FFCDD2 !default;
+$color--secondary--lime:        #B2DFDB !default;
+$color--secondary--deep-purple: #2F3237 !default;
 
 // Transparency colors
-$transparent--black-75: rgba(0, 0, 0, 0.75) default;
-$transparent--black-50: rgba(0, 0, 0, 0.50) default;
-$transparent--black-25: rgba(0, 0, 0, 0.25) default;
-$transparent--black-10: rgba(0, 0, 0, 0.10) default;
+$transparent--black-75: rgba(0, 0, 0, 0.75) !default;
+$transparent--black-50: rgba(0, 0, 0, 0.50) !default;
+$transparent--black-25: rgba(0, 0, 0, 0.25) !default;
+$transparent--black-10: rgba(0, 0, 0, 0.10) !default;
 
-$toast-bg:         $transparent--black-75 default;
-$snackbar-bg:      $transparent--black-75 default;
-$modal-overlay:    $transparent--black-50 default;
-$calendar-overlay: $transparent--black-25 default;
+$toast-bg:         $transparent--black-75 !default;
+$snackbar-bg:      $transparent--black-75 !default;
+$modal-overlay:    $transparent--black-50 !default;
+$calendar-overlay: $transparent--black-25 !default;
+
 
 /* Viewports
 ------------------------------------------------------------------------------*/
@@ -287,20 +291,6 @@ $text--xs__line-height:   24px;
 $text--xxs__line-height:  24px; // 16px instead?
 $text--xxxs__line-height: 16px;
 
-// $text--xxl__line-height:  1.66em;
-// $text--xl__line-height:   1.66em;
-// $text--f1__line-height:   1.66em;
-// $text--f2__line-height:   1.66em;
-// $text--f3__line-height:   1.66em;
-// $text--f4__line-height:   1.66em;
-// $text--f5__line-height:   1.66em;
-// $text--f6__line-height:   1.66em;
-// $text--md__line-height:   1.66em;
-// $text--sm__line-height:   1.66em;
-// $text--xs__line-height:   1.66em;
-// $text--xxs__line-height:  1.66em;
-// $text--xxxs__line-height: 1.66em;
-
 $paragraph-text: $text--md;
 
 // Grid
@@ -309,6 +299,22 @@ $grid--gutter-size: 16px;
 $grid--max-columns: 12;
 
 // Layout
+
+$space--xxl:           64px;
+$space--xxl--derived:  4em;
+$space--xl:            32px;
+$space--xl--derived:   2em;
+$space--lg:            24px;
+$space--lg--derived:   1.5em;
+$space--md:            16px;
+$space--md--derived:   1em;
+$space--sm:            8px;
+$space--sm--derived:   0.5em;
+$space--xs:            4px;
+$space--xs--derived:   0.25em;
+$space--xxs:           2px;
+$space--xxs--derived:  0.125em;
+
 $padding-base-unit: 4px;
 $margin-base-unit:  4px;
 $padding-xxl: 64px;
@@ -327,24 +333,51 @@ $margin-sm:  8px;
 $margin-xs:  4px;
 $margin-xxs: 2px;
 
+$space-map: (
+  base:            4px,
+  xxl:            64px,
+  xl:             32px,
+  lg:             24px,
+  md:             16px,
+  sm:              8px,
+  xs:              4px,
+  xxs:             2px,
+  xxl-derived:     4em,
+  xl-derived:      2em,
+  lg-derived:    1.5em,
+  md-derived:      1em,
+  sm-derived:    0.5em,
+  xs-derived:   0.25em,
+  xxs-derived: 0.125em,
+  none: 0 !important
+);
 
-$inset__xl:  $padding-xl;
-$inset__lg:  $padding-lg;
-$inset__md:  $padding-md;
-$inset__sm:  $padding-sm;
-$inset__xs:  $padding-xs;
-$inset__xxs: $padding-xxs;
+$inset-map: (
+  xl:   $padding-xl,
+  lg:   $padding-lg,
+  md:   $padding-md,
+  sm:   $padding-sm,
+  xs:   $padding-xs,
+  xxs:  $padding-xxs,
+  none: 0 !important
+);
 
-$stack__xl:  $margin-xl;
-$stack__lg:  $margin-lg;
-$stack__md:  $margin-md;
-$stack__sm:  $margin-sm;
-$stack__xs:  $margin-xs;
-$stack__xxs: $margin-xxs;
+$stack-map: (
+  xl:   $margin-xl,
+  lg:   $margin-lg,
+  md:   $margin-md,
+  sm:   $margin-sm,
+  xs:   $margin-xs,
+  xxs:  $margin-xxs,
+  none: 0 !important
+);
 
-$inline__md: $margin-md;
-$inline__sm: $margin-sm;
-$inline__xs: $margin-xs;
+$inline-map: (
+  md: $margin-md,
+  sm: $margin-sm,
+  xs: $margin-xs,
+  none: 0 !important
+);
 
 // Depth & Shadows
 $z-depth--0__index: 1;
@@ -396,9 +429,22 @@ $form--input__text-color:              $text--primary;
 $form--input__text-color--active:      $text--primary;
 $form--input__text-color--placeholder: $transparent--black-25;
 
-// Cards
-$card__inset: $padding-md $padding-lg;
-$card__outset: $margin-md;
-$card-border--default: 1px solid $color--gray-lighter;
-$card-min-width: 300px;
-$card-max-width: 440px;
+// Top Nav
+$top-nav__inset: map-get($space-map, sm) map-get($space-map, md);
+
+// Label UI components (not html label elements)
+$label__bg--default: $color--gray-lighter;
+$label__bg--alert:   $color--watermelon;
+$label__bg--accent:  $color--mint-dark;
+
+$label__text-color--default: $text--primary;
+$label__text-color--alert:   $text--light;
+$label__text-color--accent:  $text--light;
+
+$label__inset--sm: 0 map-get($space-map, xs);
+$label__inset--md: 0 map-get($space-map, sm);
+$label__inset--lg: map-get($space-map, xs) map-get($space-map, md);
+
+$label__outset--sm: map-get($space-map, xs);
+$label__outset--md: map-get($space-map, sm);
+$label__outset--lg: map-get($space-map, sm);

@@ -221,40 +221,78 @@ body {
   }
 }
 
-h1, h2, h3, h4, h5, h6, p {
-  margin: 0;
+a:link,
+a:active,
+a:visited {
+  color: $link-color;
+  text-decoration: none;
 }
 
 %h1,
 .h1 {
-  @extend %f1 !optional;
+  @extend %f1, %u-stack--lg !optional;
 }
 
 %h2,
 .h2 {
-  @extend %f2 !optional;
+  @extend %f2, %u-stack--md !optional;
 }
 
 %h3,
 .h3 {
-  @extend %f3 !optional;
+  @extend %f3, %u-stack--md !optional;
 }
 
 %h4,
 .h4 {
-  @extend %f4 !optional;
+  @extend %f4, %u-stack--md !optional;
 }
 
 %h5,
 .h5 {
-  @extend %f5 !optional;
+  @extend %f5, %u-stack--md !optional;
 }
 
 %h6,
 .h6 {
-  @extend %f6 !optional;
+  @extend %f6, %u-stack--sm !optional;
+}
+
+%p,
+.p {
+  @extend %f-md, %u-stack--md !optional;
+}
+
+
+ul,
+ol {
+  @extend %f-md, %u-stack--md !optional;
+}
+
+h1 {
+  @extend %h1;
+}
+
+h2 {
+  @extend %h2;
+}
+
+h3 {
+  @extend %h3;
+}
+
+h4 {
+  @extend %h4;
+}
+
+h5 {
+  @extend %h5;
+}
+
+h6 {
+  @extend %h6;
 }
 
 p {
-  @extend %f-md !optional;
+  @extend %p;
 }

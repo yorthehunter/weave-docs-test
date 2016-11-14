@@ -1,30 +1,46 @@
 $option--flex-grid-mobile-adjust: true;
 
-.grid-row {
+.#{$wv}-grid-row {
   @extend %flex-container, %flex-wrap, %flex-content-start !optional;
-  padding-left: $grid--gutter-size / 2;
-  padding-right: $grid--gutter-size / 2;
 
-  & > .grid-column,
+  &--no-gutter {
+
+    & > .#{$wv}-grid-col,
+    & > div {
+      margin-left:  0 !important;
+      margin-right: 0 !important;
+      flex-grow: 1;
+    }
+  }
+
+  & > .#{$wv}-grid-col,
   & > div {
-    margin-left: $grid--gutter-size / 2;
+    box-sizing: border-box;
+    margin-left:  $grid--gutter-size / 2;
     margin-right: $grid--gutter-size / 2;
     min-width: calc(#{((1/$grid--max-columns) * 100%)} - #{$grid--gutter-size});
     max-width: 100%;
     @if $option--flex-grid-mobile-adjust {
-       @include viewport-at(xs){
+      @include viewport-at(xs){
         min-width: calc(#{((1/$grid--max-columns) * 200%)} - #{$grid--gutter-size});
       }
     }
   }
 }
-// Sets up basic flex column sizing (e.g. ._1-2, ._2-3, etc.)
+
+// Removes extra padding when padded by a container
+.#{$wv}-container .#{$wv}-grid-row {
+  margin-left:  -($grid--gutter-size / 2);
+  margin-right: -($grid--gutter-size / 2);
+}
+
+// Sets up basic flex column sizing (e.g. .weave-grid-col--1-2, .weave-grid-col--2-3, etc.)
 @for $i from 1 through $grid--max-columns {
    @for $j from $i through $grid--max-columns{
     $column-width: $i / $j;
 
-    %_#{$i}-#{$j},
-    ._#{$i}-#{$j} {
+    %#{$wv}-grid-col--#{$i}-#{$j},
+    .#{$wv}-grid-col--#{$i}-#{$j} {
       flex-basis: calc(#{($column-width * 100%)} - #{$grid--gutter-size});
       @if $option--flex-grid-mobile-adjust {
          @include viewport-at(xs){
@@ -34,15 +50,16 @@ $option--flex-grid-mobile-adjust: true;
     }
   }
 }
+
 // Creates breakpoint classes for each of the grid column sizes above
 @each $breakpoint in $common-size-names {
    @include viewport-equal-to-and-smaller-than(#{$breakpoint}){
-    @for $i from 1 through $grid--max-columns {
-       @for $j from $i through $grid--max-columns{
+    @for $i from 1 through min($grid--max-columns, 6) {
+       @for $j from $i through min($grid--max-columns, 6){
         $column-width: $i / $j;
 
-        %_#{$i}-#{$j}-#{$breakpoint},
-        ._#{$i}-#{$j}-#{$breakpoint} {
+        %#{$wv}-grid-col--#{$i}-#{$j}-#{$breakpoint},
+        .#{$wv}-grid-col--#{$i}-#{$j}-#{$breakpoint} {
           flex-basis: calc(#{$column-width * 100%} - #{$grid--gutter-size}) !important;
         }
       }
@@ -50,29 +67,29 @@ $option--flex-grid-mobile-adjust: true;
   }
 }
 
-%grid--right,
-.grid--right {
+%#{$wv}-grid--right,
+.#{$wv}-grid--right {
   @extend %flex-content-end !optional;
 }
 
-%grid--left,
-.grid--left {
+%#{$wv}-grid--left,
+.#{$wv}-grid--left {
   @extend %flex-content-start !optional;
 }
 
-%grid--center,
-.grid--center {
+%#{$wv}-grid--center,
+.#{$wv}-grid--center {
   @extend %flex-content-center !optional;
 }
 
-%grid--reverse,
-.grid--reverse {
+%#{$wv}-grid--reverse,
+.#{$wv}-grid--reverse {
   @extend %flex-reverse !optional;
 }
 // This will force the last child of the grid row to fill the remaining space.
 // Useful if you have an unknown number of children.
 
-%grid--fill-space > div:last-of-type,
-.grid--fill-space > div:last-of-type {
+%#{$wv}-grid--fill-space > div:last-of-type,
+.#{$wv}-grid--fill-space > div:last-of-type {
   flex: 1;
 }
