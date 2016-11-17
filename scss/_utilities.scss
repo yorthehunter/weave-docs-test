@@ -14,6 +14,7 @@
   width: 100% !important;
 }
 
+// Force full-width on an element for xs viewports
 @include viewport-at(xs) {
   %u-full-width--xs,
   .u-full-width--xs {
@@ -21,4 +22,80 @@
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
+}
+
+// inset, stack, and inline spacing utilities
+@each $size in $size-names {
+  %u-inset--#{$size},
+  .u-inset--#{$size} {
+    padding: space(#{$size});
+  }
+
+  %u-stack--#{$size},
+  .u-stack--#{$size} {
+    margin-bottom: space(#{$size});
+  }
+
+  %u-inline--#{$size},
+  .u-inline--#{$size} {
+    margin-right: space(#{$size});
+  }
+}
+
+%inline-block {
+  display: inline-block;
+}
+
+%vertical-middle {
+  vertical-align: middle;
+}
+
+// Round corners default
+%rounded {
+  border-radius: $rounded--default;
+}
+
+// Elevates
+%elevated {
+  &--0 {
+    box-shadow: map-deep-get($elevation-map, 0, shadow);
+    z-index: map-deep-get($elevation-map, 0, index);
+  }
+  &--1 {
+    box-shadow: map-deep-get($elevation-map, 1, shadow);
+    z-index: map-deep-get($elevation-map, 1, index);
+  }
+  &--2 {
+    box-shadow: map-deep-get($elevation-map, 2, shadow);
+    z-index: map-deep-get($elevation-map, 2, index);
+  }
+  &--3 {
+    box-shadow: map-deep-get($elevation-map, 3, shadow);
+    z-index: map-deep-get($elevation-map, 3, index);
+  }
+  &--4 {
+    box-shadow: map-deep-get($elevation-map, 4, shadow);
+    z-index: map-deep-get($elevation-map, 4, index);
+  }
+  &--5 {
+    box-shadow: map-deep-get($elevation-map, 5, shadow);
+    z-index: map-deep-get($elevation-map, 5, index);
+  }
+}
+
+%elevated-box--default {
+  min-width: 20rem;
+  list-style: none;
+  background-color: white;
+  white-space: nowrap;
+  font-weight: 100;
+  @extend %rounded, %elevated--1, %f-md !optional;
+}
+
+%secondary-text-color {
+  color: $text--secondary;
+}
+
+%normal-text-weight {
+  font-weight: 100;
 }

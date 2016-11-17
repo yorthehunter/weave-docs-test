@@ -1,15 +1,11 @@
-@function map-deep-get($map, $keys...) {
-  @each $key in $keys {
-    $map: map-get($map, $key);
-  }
-  @return $map;
-}
-
 /* Global
 ------------------------------------------------------------------------------*/
 
-$size-names: xxxl, xxl, xl, lg, md, sm, xs, xxs, xxxs;
-$common-size-names: xl, lg, md, sm, xs;
+// Namespace variable
+$wv: "weave" !default;
+
+$size-names: xxxl, xxl, xl, lg, md, sm, xs, xxs, xxxs, "none" !default;
+$common-size-names: xl, lg, md, sm, xs !default;
 
 $size-name-map: (
   xxxl: "extra-extra-extra-large",
@@ -20,52 +16,44 @@ $size-name-map: (
   sm:   "small",
   xs:   "extra-small",
   xxs:  "extra-extra-small",
-  xxxs: "extra-extra-extra-small",
+  xxxs: "extra-extra-extra-small"
 );
 
 // The unit of measurement we want to stick to
 // More technically, the base rem unit we share throughout
-$base-visual-rhythm: 8px default;
+$base-visual-rhythm: 8px !default;
 
 /* Colors
 ------------------------------------------------------------------------------*/
 
-// Brand colors
-$color--mint-dark:           #00A19A default;
-$color--mint:                #00BDB4 default;
-$color--mint-lightest:       #DDF8F7 default;
-$color--watermelon:          #F05D61 default;
-$color--watermelon-light:    #F6A2A4 default;
-$color--watermelon-lightest: #FFCDD2 default;
+$color-map: (
+  white:               #FFFFFF,
+  black:               #000000,
+  mint-dark:           #00A19A,
+  mint-base:           #00BDB4,
+  mint-lightest:       #DDF8F7,
+  watermelon-base:     #F05D61,
+  watermelon-light:    #F6A2A4,
+  watermelon-lightest: #FFCDD2,
+  blue-base:     #2F8AB6,
+  yellow-base:   #FFEE7E,
+  yellow-light:  #FFFAD6,
+  gray-dark:     #303030,
+  gray-base:     #727272,
+  gray-light:    #D5D5D5,
+  gray-lightest: #F7F7F7,
+  cyan:        #F05D61,
+  pink:        #00A19A,
+  amber:       #2F3237,
+  deep-orange: #FFCDD2,
+  lime:        #B2DFDB,
+  deep-purple: #2F3237,
+  black-75: rgba(0, 0, 0, 0.75),
+  black-50: rgba(0, 0, 0, 0.50),
+  black-25: rgba(0, 0, 0, 0.25),
+  black-10: rgba(0, 0, 0, 0.10)
+);
 
-// UI colors
-$color--blue:         #2F8AB6 default;
-$color--yellow:       #FFEE7E default;
-$color--yellow-light: #FFFAD6 default;
-$color--gray-dark:    #303030 default;
-$color--gray:         #727272 default;
-$color--gray-light:   #D5D5D5 default;
-$color--gray-lighter: #F7F7F7 default;
-$color--white:        #FFFFFF default;
-
-// Secondary colors
-$color--secondary--cyan:        #F05D61 default;
-$color--secondary--pink:        #00A19A default;
-$color--secondary--amber:       #2F3237 default;
-$color--secondary--deep-orange: #FFCDD2 default;
-$color--secondary--lime:        #B2DFDB default;
-$color--secondary--deep-purple: #2F3237 default;
-
-// Transparency colors
-$transparent--black-75: rgba(0, 0, 0, 0.75) default;
-$transparent--black-50: rgba(0, 0, 0, 0.50) default;
-$transparent--black-25: rgba(0, 0, 0, 0.25) default;
-$transparent--black-10: rgba(0, 0, 0, 0.10) default;
-
-$toast-bg:         $transparent--black-75 default;
-$snackbar-bg:      $transparent--black-75 default;
-$modal-overlay:    $transparent--black-50 default;
-$calendar-overlay: $transparent--black-25 default;
 
 /* Viewports
 ------------------------------------------------------------------------------*/
@@ -98,25 +86,6 @@ $breakpoint-map: (
     base-font: 16px
   )
 );
-
-// For convenience, breakpoint variables
-$breakpoint-min-xs: map-deep-get($breakpoint-map, xs, min-width);
-$breakpoint-min-sm: map-deep-get($breakpoint-map, sm, min-width);
-$breakpoint-min-md: map-deep-get($breakpoint-map, md, min-width);
-$breakpoint-min-lg: map-deep-get($breakpoint-map, lg, min-width);
-$breakpoint-min-xl: map-deep-get($breakpoint-map, xl, min-width);
-
-$breakpoint-max-xs: map-deep-get($breakpoint-map, xs, max-width);
-$breakpoint-max-sm: map-deep-get($breakpoint-map, sm, max-width);
-$breakpoint-max-md: map-deep-get($breakpoint-map, md, max-width);
-$breakpoint-max-lg: map-deep-get($breakpoint-map, lg, max-width);
-$breakpoint-max-xl: map-deep-get($breakpoint-map, xl, max-width);
-
-$breakpoint-base-font-xs: map-deep-get($breakpoint-map, xs, base-font);
-$breakpoint-base-font-sm: map-deep-get($breakpoint-map, sm, base-font);
-$breakpoint-base-font-md: map-deep-get($breakpoint-map, md, base-font);
-$breakpoint-base-font-lg: map-deep-get($breakpoint-map, lg, base-font);
-$breakpoint-base-font-xl: map-deep-get($breakpoint-map, xl, base-font);
 
 @mixin viewport-at($breakpoint) {
   @if map-has-key($breakpoint-map, $breakpoint) {
@@ -178,188 +147,157 @@ $breakpoint-base-font-xl: map-deep-get($breakpoint-map, xl, base-font);
   }
 }
 
-
-.breakpoint-test {
-  @include viewport-at(xl){
-    &:after {
-      content: "xl";
-    }
-  }
-  @include viewport-at(lg){
-    &:after {
-      content: "lg";
-    }
-  }
-  @include viewport-at(md){
-    &:after {
-      content: "md";
-    }
-  }
-  @include viewport-at(sm){
-    &:after {
-      content: "sm";
-    }
-  }
-  @include viewport-at(xs){
-    &:after {
-      content: "xs";
-    }
-  }
-}
-
-/* UI
+/* UI General
 ------------------------------------------------------------------------------*/
-$ui--accent:             $color--mint;
-$ui--accent--under-text: $color--mint-dark;
+$ui--accent:             color(mint-base);
+$ui--accent--under-text: color(mint-dark);
 
-$success--color: $color--mint;
-$error--color:   $color--watermelon;
-$warning--color: $color--yellow;
+$success--color: color(mint-base);
+$error--color:   color(watermelon-base);
+$warning--color: color(yellow-base);
 
-$field--success: $color--mint;
-$field--error:   $color--watermelon;
-$field--info:    $color--mint-lightest;
-$field--warning: $color--yellow;
+$field--success: color(mint-base);
+$field--error:   color(watermelon-base);
+$field--info:    color(mint-lightest);
+$field--warning: color(yellow-base);
 
 $disabled-opacity: 0.5;
 
-$border--default: $color--gray-light;
-$rule--default:   $color--gray-light;
-$border--error:   $color--watermelon;
-$rule--error:     $color--watermelon;
-$border--success: $color--mint;
-$rule--success:   $color--mint;
+$border--default: color(gray-light);
+$rule--default:   color(gray-light);
+$border--error:   color(watermelon-base);
+$rule--error:     color(watermelon-base);
+$border--success: color(mint-base);
+$rule--success:   color(mint-base);
 
 $rounded--default:        2px;
 $rounded--perfect-circle: 100%;
+$rounded--perfect-pill:   100vw;
 
-// Typography
-$text--primary:   $color--gray-dark;
-$text--secondary: $color--gray;
-$text--light:     $color--white;
-$text--error:     $color--watermelon;
-$text--success:   $color--mint-dark;
-$text--warning:   $color--yellow;
+/* Typography
+------------------------------------------------------------------------------*/
+$text--primary:   color(gray-dark);
+$text--secondary: color(gray-base);
+$text--light:     color(white);
+$text-on-dark:    color(white);
+$text-on-light:   color(black);
+$text--error:     color(watermelon-base);
+$text--success:   color(mint-dark);
+$text--warning:   color(yellow-base);
 
-$base-pixel-size-unit:  4px;
-$base-line-height-unit: 8px;
+$font-face--default:   'Whitney SSm';
+$font-weight--default: "normal";
+$font-weight--light:   "normal";
+$font-weight--medium:  500;
+$font-weight--bold:    "bold";
 
-$type-face--default: 'Whitney SSm Book';
-$text--xxl:  100px;
-$text--xl:   64px;
-$text--f1:   54px;
-$text--f2:   46px;
-$text--f3:   36px;
-$text--f4:   31px;
-$text--f5:   25px;
-$text--f6:   20px;
-$text--md:   16px;
-$text--sm:   14px;
-$text--xs:   12px;
-$text--xxs:  10px;
-$text--xxxs: 8px;
+$type-scale-map: (
+  xxl: (
+    lh:   168px,
+    px: 100px
+  ),
+  xl: (
+    lh:   112px,
+    px: 64px
+  ),
+  f1: (
+    lh:   96px,
+    px: 54px
+  ),
+  f2: (
+    lh:   80px,
+    px: 46px
+  ),
+  f3: (
+    lh:   64px,
+    px: 36px
+  ),
+  f4: (
+    lh:   56px,
+    px: 31px
+  ),
+  f5: (
+    lh:   48px,
+    px: 25px
+  ),
+  f6: (
+    lh:   40px,
+    px: 20px
+  ),
+  md: (
+    lh:   32px,
+    px: 16px
+  ),
+  sm: (
+    lh:   24px,
+    px: 14px
+  ),
+  xs: (
+    lh:   24px,
+    px: 12px
+  ),
+  xxs: (
+    lh:   24px,
+    px: 10px
+  ),
+  xxxs: (
+    lh:   16px,
+    px: 8px
+  ),
 
-// $text--xxl:  6.25em;
-// $text--xl:   4em;
-// $text--f1:   3.375em;
-// $text--f2:   2.875em;
-// $text--f3:   2.25em;
-// $text--f4:   1.9375em;
-// $text--f5:   1.5625em;
-// $text--f6:   1.25em;
-// $text--md:   1em;
-// $text--sm:   0.875em;
-// $text--xs:   0.75em;
-// $text--xxs:  0.625em;
-// $text--xxxs: 0.5em;
-
-$text--xxl__line-height:  168px;
-$text--xl__line-height:   112px;
-$text--f1__line-height:   96px;
-$text--f2__line-height:   80px;
-$text--f3__line-height:   64px;
-$text--f4__line-height:   56px;
-$text--f5__line-height:   48px;
-$text--f6__line-height:   40px;
-$text--md__line-height:   32px;
-$text--sm__line-height:   24px;
-$text--xs__line-height:   24px;
-$text--xxs__line-height:  24px; // 16px instead?
-$text--xxxs__line-height: 16px;
-
-// $text--xxl__line-height:  1.66em;
-// $text--xl__line-height:   1.66em;
-// $text--f1__line-height:   1.66em;
-// $text--f2__line-height:   1.66em;
-// $text--f3__line-height:   1.66em;
-// $text--f4__line-height:   1.66em;
-// $text--f5__line-height:   1.66em;
-// $text--f6__line-height:   1.66em;
-// $text--md__line-height:   1.66em;
-// $text--sm__line-height:   1.66em;
-// $text--xs__line-height:   1.66em;
-// $text--xxs__line-height:  1.66em;
-// $text--xxxs__line-height: 1.66em;
-
-$paragraph-text: $text--md;
-
-// Grid
-
-$grid--gutter-size: 16px;
-$grid--max-columns: 12;
+);
 
 // Layout
-$padding-base-unit: 4px;
-$margin-base-unit:  4px;
-$padding-xxl: 64px;
-$padding-xl:  32px;
-$padding-lg:  24px;
-$padding-md:  16px;
-$padding-sm:  8px;
-$padding-xs:  4px;
-$padding-xxs: 2px;
-
-$margin-xxl: 104px;
-$margin-xl:  64px;
-$margin-lg:  32px;
-$margin-md:  16px;
-$margin-sm:  8px;
-$margin-xs:  4px;
-$margin-xxs: 2px;
-
-
-$inset__xl:  $padding-xl;
-$inset__lg:  $padding-lg;
-$inset__md:  $padding-md;
-$inset__sm:  $padding-sm;
-$inset__xs:  $padding-xs;
-$inset__xxs: $padding-xxs;
-
-$stack__xl:  $margin-xl;
-$stack__lg:  $margin-lg;
-$stack__md:  $margin-md;
-$stack__sm:  $margin-sm;
-$stack__xs:  $margin-xs;
-$stack__xxs: $margin-xxs;
-
-$inline__md: $margin-md;
-$inline__sm: $margin-sm;
-$inline__xs: $margin-xs;
+$space-map: (
+  base:            4px,
+  xxxl:          104px,
+  xxl:            64px,
+  xl:             32px,
+  lg:             24px,
+  md:             16px,
+  sm:              8px,
+  xs:              4px,
+  xxs:             2px,
+  xxxs:            1px,
+  xxl-in-em:       4em,
+  xl-in-em:        2em,
+  lg-in-em:      1.5em,
+  md-in-em:        1em,
+  sm-in-em:      0.5em,
+  xs-in-em:     0.25em,
+  xxs-in-em:   0.125em,
+  xxxs-in-em: 0.0625em,
+  none: 0 !important
+);
 
 // Depth & Shadows
-$z-depth--0__index: 1;
-$z-depth--1__index: 2;
-$z-depth--2__index: 4;
-$z-depth--3__index: 8;
-$z-depth--4__index: 16;
-$z-depth--5__index: 32;
 
-$z-depth--0__shadow: 0 0 0 rgba(0,0,0,0.0); //no shadow
-$z-depth--1__shadow: 0 2px 5px rgba(0,0,0,0.16),  0 2px 10px rgba(0,0,0,0.12);
-$z-depth--2__shadow: 0 8px 17px rgba(0,0,0,0.16), 0 6px 20px rgba(0,0,0,0.19);
-$z-depth--3__shadow: 0 12px 15px rgba(0,0,0,0.24), 0 17px 50px rgba(0,0,0,0.19);
-$z-depth--4__shadow: 0 16px 28px rgba(0,0,0,0.22), 0 25px 55px rgba(0,0,0,0.21);
-$z-depth--5__shadow: 0 27px 24px rgba(0,0,0,0.20), 0 40px 77px rgba(0,0,0,0.22);
+$elevation-map: (
+  0: (
+    index:  0,
+    shadow: 0 0 0 rgba(0,0,0,0.0)
+  ),
+  1: (
+    index:  100,
+    shadow: 0 2px 5px rgba(0,0,0,0.16)
+  ),
+  2: (
+    index:  200,
+    shadow: 0 8px 17px rgba(0,0,0,0.16)
+  ),
+  3: (
+    index:  300,
+    shadow: 0 12px 15px rgba(0,0,0,0.24)
+  ),
+  4: (
+    index:  400,
+    shadow: 0 16px 28px rgba(0,0,0,0.22)
+  ),
+  5: (
+    index:  500,
+    shadow: 0 27px 24px rgba(0,0,0,0.20)
+  )
+);
 
 // Transitions
 $transition__speed--default: 0.4s;
@@ -367,38 +305,31 @@ $transition__speed--fast:    0.2s;
 $transition__speed--slow:    0.8s;
 $transition__easing--default: ease-in-out;
 $transition__easing--complex: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+$transition--elevation: box-shadow $transition__speed--fast $transition__easing--default;
+$transition--bg:        background-color $transition__speed--fast $transition__easing--default;
+$transition--fade:      opacity $transition__speed--fast $transition__easing--default;
+$transition--all:       all $transition__speed--fast $transition__easing--default;
 
 // Links
-$link-color: $color--blue;
+$link-color: color(blue-base);
 
-// Buttons
-$button--primary:   $color--blue;
-$button--secondary: $color--white;
-$button--flat:      transparent;
-$button--cta:       $color--watermelon;
-$button--primary__text-color: $text--light;
-$button--secondary-color:     $text--primary;
-$button--flat__text-color:    $link-color;
-$button__shadow:         0 2px 3px rgba(0,0,0,0.23);
-$button--active__shadow: $z-depth--1__shadow;
-
-// Forms
-$form--label__text-color:         $text--secondary;
-$form--label__text-color--error:  $error--color;
-$form--label__text-color--active: $success--color;
-$form--help__text-color:          $text--secondary;
-$form--help__text-color--error:   $error--color;
-$form--input-rule:                $rule--default;
-$form--input-rule--error:         $rule--error;
-$form--input-rule--active:        $rule--success;
-
-$form--input__text-color:              $text--primary;
-$form--input__text-color--active:      $text--primary;
-$form--input__text-color--placeholder: $transparent--black-25;
-
-// Cards
-$card__inset: $padding-md $padding-lg;
-$card__outset: $margin-md;
-$card-border--default: 1px solid $color--gray-lighter;
-$card-min-width: 300px;
-$card-max-width: 440px;
+// // Forms
+// $form--label__text-color:         $text--secondary;
+// $form--label__text-color--error:  $error--color;
+// $form--label__text-color--active: $success--color;
+// $form--help__text-color:          $text--secondary;
+// $form--help__text-color--error:   $error--color;
+// $form--input-rule:                $rule--default;
+// $form--input-rule--error:         $rule--error;
+// $form--input-rule--active:        $rule--success;
+//
+// $form--input__text-color:              $text--primary;
+// $form--input__text-color--active:      $text--primary;
+// $form--input__text-color--placeholder: color(black-25);
+//
+// // Cards
+// $card__inset: $padding-md $padding-lg;
+// $card__outset: $margin-md;
+// $card-border--default: 1px solid color(gray-lightest);
+// $card-min-width: 300px;
+// $card-max-width: 440px;
