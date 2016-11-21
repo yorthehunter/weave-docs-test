@@ -5,7 +5,6 @@ module StitchFix
     class << self
       # Inspired by Kaminari
       def load!
-        puts "heLLooooooooo"
         if rails?
           register_rails_engine
         elsif sprockets?
