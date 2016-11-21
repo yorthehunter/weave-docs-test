@@ -1,0 +1,54 @@
+// The container will "contain" content to the various defined breakpoints
+
+$container-padding: space(md-in-em);
+
+.#{$ns}-container {
+  @extend %clearfix !optional;
+  margin-left:  auto;
+  margin-right: auto;
+  padding-left:  $container-padding;
+  padding-right: $container-padding;
+  box-sizing: border-box;
+  max-width: calc(#{map-deep-get($breakpoint-map, lg, max-width)} - (2 * #{$container-padding}));
+
+  @include viewport-equal-to-and-smaller-than(lg) {
+    width: calc(#{map-deep-get($breakpoint-map, md, max-width)} - (2 * #{$container-padding}));
+  }
+  @include viewport-equal-to-and-smaller-than(md) {
+    width: calc(#{map-deep-get($breakpoint-map, sm, max-width)} - (2 * #{$container-padding}));
+  }
+  @include viewport-equal-to-and-smaller-than(sm) {
+    width: calc(#{map-deep-get($breakpoint-map, xs, max-width)} - (2 * #{$container-padding}));
+  }
+  @include viewport-at(xs) {
+    width: 100%;
+  }
+
+  &--lg {
+    max-width: map-deep-get($breakpoint-map, lg, max-width);
+  }
+
+  &--md {
+    max-width: map-deep-get($breakpoint-map, md, max-width);
+  }
+
+  &--sm {
+    max-width: map-deep-get($breakpoint-map, sm, max-width);
+  }
+
+  &--xs {
+    max-width: map-deep-get($breakpoint-map, xs, max-width);
+  }
+
+  &--left {
+    margin-right: auto;
+    margin-left:  0;
+  }
+
+  &--right {
+    margin-right: 0;
+    margin-left:  auto;
+  }
+
+
+}

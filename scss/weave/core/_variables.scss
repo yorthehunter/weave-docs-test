@@ -1,0 +1,287 @@
+/* Global
+------------------------------------------------------------------------------*/
+
+// Namespace variable
+$ns: "weave" !default;
+
+$size-names: xxxl, xxl, xl, lg, md, sm, xs, xxs, xxxs, "none" !default;
+$common-size-names: xl, lg, md, sm, xs !default;
+
+$size-name-map: (
+  xxxl: "extra-extra-extra-large",
+  xxl:  "extra-extra-large",
+  xl:   "extra-large",
+  lg:   "large",
+  md:   "medium",
+  sm:   "small",
+  xs:   "extra-small",
+  xxs:  "extra-extra-small",
+  xxxs: "extra-extra-extra-small"
+);
+
+// The unit of measurement we want to stick to
+// More technically, the base rem unit we share throughout
+$base-visual-rhythm: 8px !default;
+
+/* Colors
+------------------------------------------------------------------------------*/
+
+$color-map: (
+  white:               #FFFFFF,
+  black:               #000000,
+  mint-dark:           #00A19A,
+  mint-base:           #00BDB4,
+  mint-lightest:       #DDF8F7,
+  watermelon-base:     #F05D61,
+  watermelon-light:    #F6A2A4,
+  watermelon-lightest: #FFCDD2,
+  blue-base:     #2F8AB6,
+  yellow-base:   #FFEE7E,
+  yellow-light:  #FFFAD6,
+  gray-dark:     #303030,
+  gray-base:     #727272,
+  gray-light:    #D5D5D5,
+  gray-lightest: #F7F7F7,
+  cyan:        #00BCD4,
+  pink:        #F23C79,
+  amber:       #FFB939,
+  deep-orange: #FF7137,
+  lime:        #BFCD00,
+  deep-purple: #9575CD,
+  black-75: rgba(0, 0, 0, 0.75),
+  black-50: rgba(0, 0, 0, 0.50),
+  black-25: rgba(0, 0, 0, 0.25),
+  black-10: rgba(0, 0, 0, 0.10)
+);
+
+
+/* Value Modifiers
+------------------------------------------------------------------------------*/
+
+$value-modifier--heavy:   20% !default;
+$value-modifier--medium:  10% !default;
+$value-modifier--light:   5% !default;
+
+
+/* Viewports
+------------------------------------------------------------------------------*/
+
+// Map of breakpoints upper and lower bounds and base font size
+$breakpoint-map: (
+  xs: (
+    min-width: 0,
+    max-width: 599px,
+    base-font: 12px
+  ),
+  sm: (
+    min-width: 600px,
+    max-width: 767px,
+    base-font: 14px
+  ),
+  md: (
+    min-width: 768px,
+    max-width: 991px,
+    base-font: 14px
+  ),
+  lg: (
+    min-width: 992px,
+    max-width: 1199px,
+    base-font: 16px
+  ),
+  xl: (
+    min-width: 1200px,
+    max-width: null,
+    base-font: 16px
+  )
+);
+
+/* UI General
+------------------------------------------------------------------------------*/
+$ui--accent:             color(mint-base) !default;
+$ui--accent--under-text: color(mint-dark) !default;
+
+$success--color: color(mint-base) !default;
+$error--color:   color(watermelon-base) !default;
+$warning--color: color(yellow-base) !default;
+
+$field--success: color(mint-base) !default;
+$field--error:   color(watermelon-base) !default;
+$field--info:    color(mint-lightest) !default;
+$field--warning: color(yellow-base) !default;
+$field--default: color(gray-lightest) !default;
+
+$disabled-opacity: 0.5 !default;
+
+$border--default: color(gray-light) !default;
+$rule--default:   color(gray-light) !default;
+$border--error:   color(watermelon-base) !default;
+$rule--error:     color(watermelon-base) !default;
+$border--success: color(mint-base) !default;
+$rule--success:   color(mint-base) !default;
+
+$rounded--default:        2px !default;
+$rounded--perfect-circle: 100% !default;
+$rounded--perfect-pill:   100vw !default;
+
+/* Typography
+------------------------------------------------------------------------------*/
+$text--primary:   color(gray-dark) !default;
+$text--secondary: color(gray-base) !default;
+$text--light:     color(white) !default;
+$text-on-dark:    color(white) !default;
+$text-on-light:   color(black) !default;
+$text--error:     color(watermelon-base) !default;
+$text--success:   color(mint-dark) !default;
+$text--warning:   color(yellow-base) !default;
+
+$font-face--default:   'Whitney SSm' !default;
+$font-weight--default: normal !default;
+$font-weight--light:   normal !default;
+$font-weight--medium:  500 !default;
+$font-weight--bold:    bold !default;
+
+$type-scale-map: (
+  xxl: (
+    lh:   168px,
+    px: 100px
+  ),
+  xl: (
+    lh:   112px,
+    px: 64px
+  ),
+  f1: (
+    lh:   96px,
+    px: 54px
+  ),
+  f2: (
+    lh:   80px,
+    px: 46px
+  ),
+  f3: (
+    lh:   64px,
+    px: 36px
+  ),
+  f4: (
+    lh:   56px,
+    px: 31px
+  ),
+  f5: (
+    lh:   48px,
+    px: 25px
+  ),
+  f6: (
+    lh:   40px,
+    px: 20px
+  ),
+  md: (
+    lh:   32px,
+    px: 16px
+  ),
+  sm: (
+    lh:   24px,
+    px: 14px
+  ),
+  xs: (
+    lh:   24px,
+    px: 12px
+  ),
+  xxs: (
+    lh:   24px,
+    px: 10px
+  ),
+  xxxs: (
+    lh:   16px,
+    px: 8px
+  ),
+
+);
+
+// Layout
+$space-map: (
+  base:            4px,
+  xxxl:          104px,
+  xxl:            64px,
+  xl:             32px,
+  lg:             24px,
+  md:             16px,
+  sm:              8px,
+  xs:              4px,
+  xxs:             2px,
+  xxxs:            1px,
+  xxl-in-em:       4em,
+  xl-in-em:        2em,
+  lg-in-em:      1.5em,
+  md-in-em:        1em,
+  sm-in-em:      0.5em,
+  xs-in-em:     0.25em,
+  xxs-in-em:   0.125em,
+  xxxs-in-em: 0.0625em,
+  none: 0 !important
+);
+
+// Depth & Shadows
+
+$elevation-map: (
+  0: (
+    index:  0,
+    shadow: 0 0 0 rgba(0,0,0,0.0)
+  ),
+  1: (
+    index:  100,
+    shadow: 0 2px 5px rgba(0,0,0,0.16)
+  ),
+  2: (
+    index:  200,
+    shadow: 0 8px 17px rgba(0,0,0,0.16)
+  ),
+  3: (
+    index:  300,
+    shadow: 0 12px 15px rgba(0,0,0,0.24)
+  ),
+  4: (
+    index:  400,
+    shadow: 0 16px 28px rgba(0,0,0,0.22)
+  ),
+  5: (
+    index:  500,
+    shadow: 0 27px 24px rgba(0,0,0,0.20)
+  )
+);
+
+// Transitions
+$transition__speed--default: 0.4s !default;
+$transition__speed--fast:    0.2s !default;
+$transition__speed--slow:    0.8s !default;
+
+$transition__easing--default: ease-in-out !default;
+$transition__easing--complex: cubic-bezier(0.455, 0.03, 0.515, 0.955) !default;
+
+$transition--width:     width            $transition__speed--fast $transition__easing--default !default;
+$transition--elevation: box-shadow       $transition__speed--fast $transition__easing--default !default;
+$transition--bg:        background-color $transition__speed--fast $transition__easing--default !default;
+$transition--fade:      opacity          $transition__speed--fast $transition__easing--default !default;
+$transition--all:       all $transition__speed--fast $transition__easing--default !default;
+
+// Links
+$link-color: color(blue-base) !default;
+
+// // Forms
+// $form--label__text-color:         $text--secondary;
+// $form--label__text-color--error:  $error--color;
+// $form--label__text-color--active: $success--color;
+// $form--help__text-color:          $text--secondary;
+// $form--help__text-color--error:   $error--color;
+// $form--input-rule:                $rule--default;
+// $form--input-rule--error:         $rule--error;
+// $form--input-rule--active:        $rule--success;
+//
+// $form--input__text-color:              $text--primary;
+// $form--input__text-color--active:      $text--primary;
+// $form--input__text-color--placeholder: color(black-25);
+//
+// // Cards
+// $card__inset: $padding-md $padding-lg;
+// $card__outset: $margin-md;
+// $card-border--default: 1px solid color(gray-lightest);
+// $card-min-width: 300px;
+// $card-max-width: 440px;

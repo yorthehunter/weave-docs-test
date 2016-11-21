@@ -1,0 +1,102 @@
+// Flexbox properties
+
+%flex-container {
+  display: flex;
+}
+
+%flex-wrap {
+  flex-wrap: wrap;
+}
+
+%flex-reverse {
+  flex-direction: row-reverse;
+}
+
+%flex-vertical {
+  flex-direction: column;
+
+  &%flex-reverse {
+      flex-direction: column-reverse;
+  }
+}
+
+%flex-vertical-reverse {
+  flex-direction: column-reverse;
+}
+
+%flex-start {
+  align-items: flex-start;
+}
+
+%flex-center {
+  align-items: center;
+}
+
+%flex-end {
+  align-items: flex-end;
+}
+
+%flex-full {
+  align-items: stretch;
+}
+
+%flex-content-start {
+  justify-content: flex-start;
+}
+
+%flex-content-spaced {
+  justify-content: space-around;
+}
+
+%flex-content-grid {
+  justify-content: space-between;
+}
+
+%flex-content-center {
+  justify-content: center;
+}
+
+%flex-content-end {
+  justify-content: flex-end;
+}
+// Child properties
+%fi,
+%flex-item {
+  flex: 1 0 auto;
+}
+
+%fi-start,
+%flex-item-start {
+  align-self: flex-start;
+}
+
+%fi-c,
+%flex-item-c {
+  align-self: center;
+}
+
+%fi-end,
+%flex-item-end {
+  align-self: flex-end;
+}
+
+%fi-full,
+%flex-item-full {
+  align-self: stretch;
+}
+
+%flex-0 {
+  flex: 0;
+}
+
+%flex-2 {
+  flex: 2;
+}
+
+%flex-4 {
+  flex: 4;
+}
+
+%flex-8 {
+  flex: 8;
+}

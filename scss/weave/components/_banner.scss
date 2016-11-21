@@ -1,0 +1,52 @@
+$banner__outset: space(md) 0 space(md) space(lg);
+
+$banner--error:   $error--color;
+$banner--warning: $warning--color;
+$banner--info:    $field--info;
+$banner--success: $success--color;
+
+$banner--error__text-color:   $text-on-dark;
+$banner--warning__text-color: $text-on-light;
+$banner--info__text-color:    $text-on-light;
+$banner--success__text-color: $text-on-dark;
+
+$banner__close-inline: space(md);
+
+
+.#{$ns}-banner {
+  padding: $banner__outset;
+  @extend %f-md, %elevated--1, %flex-container, %type--light !optional;
+
+  &__message {
+    flex-grow: 1;
+  }
+
+  &__close {
+    padding-left:  $banner__close-inline;
+    padding-right: $banner__close-inline;
+
+    &::after {
+      content: 'X';
+    }
+  }
+
+  &--error {
+    background-color: $banner--error;
+    color: $banner--error__text-color;
+  }
+
+  &--warning {
+    background-color: $banner--warning;
+    color: $banner--warning__text-color;
+  }
+
+  &--info {
+    background-color: $banner--info;
+    color: $banner--info__text-color;
+  }
+
+  &--success {
+    background-color: $banner--success;
+    color: $banner--success__text-color;
+  }
+}

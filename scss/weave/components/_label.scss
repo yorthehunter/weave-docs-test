@@ -1,0 +1,49 @@
+// Label Variables
+$label__bg--default: $field--default;
+$label__bg--alert:   $error--color;
+$label__bg--accent:  $ui--accent;
+
+$label__text-color--default: $text--primary;
+$label__text-color--alert:   color(white);
+$label__text-color--accent:  color(white);
+
+$label__inset--sm: 0 space(xs);
+$label__inset--md: 0 space(sm);
+$label__inset--lg: space(xs) space(md);
+
+$label__outset--sm: space(xs);
+$label__outset--md: space(sm);
+$label__outset--lg: space(sm);
+
+.#{$ns}-label {
+  @extend %rounded, %inline-block, %vertical-middle, %type--medium;
+  background-color: $label__bg--default;
+
+  &--accent {
+    background-color: $label__bg--accent;
+    color: $label__text-color--accent;
+  }
+
+  &--alert {
+    background-color: $label__bg--alert;
+    color: $label__text-color--alert;
+  }
+
+  &--sm {
+    @extend %f-xxxs, %uppercase;
+    padding:      $label__inset--sm;
+    margin-right: $label__outset--sm;
+  }
+
+  &--md {
+    @extend %f-xs;
+    padding:      $label__inset--md;
+    margin-right: $label__outset--md;
+  }
+
+  &--lg {
+    @extend %f-sm;
+    padding:      $label__inset--lg;
+    margin-right: $label__outset--lg;
+  }
+}

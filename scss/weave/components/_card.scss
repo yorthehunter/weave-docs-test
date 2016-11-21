@@ -1,0 +1,42 @@
+// .card {
+//   @extend %rounded, %has-shadow, %z-index--1 !optional;
+//   padding: $card__inset;
+//   margin: $card__outset;
+//   border: $card-border--default;
+//   display: inline-block;
+//   min-width: $card-min-width;
+//   max-width: $card-max-width;
+// }
+
+// .card-title {
+//   @extend %f5, %normal-text-weight !optional;
+// }
+//
+// .card-subtitle {
+//   @extend %f6, %normal-text-weight, %secondary-text-color !optional;
+// }
+//
+// .card-body {
+//   @extend %f-sm !optional;
+//
+//   p {
+//     margin-bottom: map-get($stack-map, sm);
+//   }
+//
+//   p + p {
+//     margin-bottom: 0;
+//   }
+// }
+//
+// .card-actions {
+//   float: right;
+//   display: flex;
+//
+//   .card-actions__item {
+//     margin-right: map-get($inline-map, sm);
+//
+//     &:last-child {
+//       margin-right: 0;
+//     }
+//   }
+// }

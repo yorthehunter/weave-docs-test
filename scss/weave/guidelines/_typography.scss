@@ -1,0 +1,322 @@
+%f-xxxs {
+  font-size: type(xxxs);
+  line-height: type(xxxs, lh);
+}
+
+%f-xxs {
+  font-size: type(xxs);
+  line-height: type(xxs, lh);
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: type(xxxs);
+    line-height: type(xxxs, lh);
+  }
+}
+
+%f-xs {
+  font-size: type(xs);
+  line-height: type(xs, lh);
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: type(xxs);
+    line-height: type(xxs, lh);
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: type(xxxs);
+    line-height: type(xxxs, lh);
+  }
+}
+
+%f-sm {
+  font-size: type(sm);
+  line-height: type(sm, lh);
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: type(xs);
+    line-height: type(xs, lh);
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: type(xxs);
+    line-height: type(xxs, lh);
+  }
+}
+
+%f-md {
+  font-size: type(md);
+  line-height: type(md, lh);
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: type(sm);
+    line-height: type(sm, lh);
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: type(xs);
+    line-height: type(xs, lh);
+  }
+}
+
+%f6 {
+  font-size: type(f6);
+  line-height: type(f6, lh);
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: type(md);
+    line-height: type(md, lh);
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: type(sm);
+    line-height: type(sm, lh);
+  }
+}
+
+%f5 {
+  font-size: type(f5);
+  line-height: type(f5, lh);
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: type(f6);
+    line-height: type(f6, lh);
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: type(md);
+    line-height: type(md, lh);
+  }
+}
+
+%f4 {
+  font-size: type(f4);
+  line-height: type(f4, lh);
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: type(f5);
+    line-height: type(f5, lh);
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: type(f6);
+    line-height: type(f6, lh);
+  }
+}
+
+%f3 {
+  font-size: type(f3);
+  line-height: type(f3, lh);
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: type(f4);
+    line-height: type(f4, lh);
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: type(f5);
+    line-height: type(f5, lh);
+  }
+}
+
+%f2 {
+  font-size: type(f2);
+  line-height: type(f2, lh);
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: type(f3);
+    line-height: type(f3, lh);
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: type(f4);
+    line-height: type(f4, lh);
+  }
+}
+
+%f1 {
+  font-size: type(f1);
+  line-height: type(f1, lh);
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: type(f2);
+    line-height: type(f2, lh);
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: type(f3);
+    line-height: type(f3, lh);
+  }
+}
+
+%f-xl {
+  font-size: type(xl);
+  line-height: type(xl, lh);
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: type(f1);
+    line-height: type(f1, lh);
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: type(f2);
+    line-height: type(f2, lh);
+  }
+}
+
+%f-xxl {
+  font-size: type(xxl);
+  line-height: type(xxl, lh);
+
+  @include viewport-equal-to-and-smaller-than(md) {
+    font-size: type(xl);
+    line-height: type(xl, lh);
+  }
+
+  @include viewport-equal-to-and-smaller-than(xs) {
+    font-size: type(f1);
+    line-height: type(f1, lh);
+  }
+}
+
+// Sets us up to have a standardized rem base (in our case, 8px)
+// We make use of this rem standard to keep most of our elements on an 8px grid
+// We make exceptions, of course, but generally keeping to that grid gives us a
+// cleaner layout overall.
+html {
+  font-size: $base-visual-rhythm;
+}
+
+// Typography basic setup
+body {
+  font-family: $font-face--default, helvetica, sans-serif;
+  color: $text--primary;
+
+  // Set a base font size for each of the breakpoints
+  @include viewport-at(xl) {
+    font-size: map-deep-get($breakpoint-map, xl, base-font);
+  }
+
+  @include viewport-at(lg) {
+    font-size: map-deep-get($breakpoint-map, lg, base-font);
+  }
+
+  @include viewport-at(md) {
+    font-size: map-deep-get($breakpoint-map, md, base-font);
+  }
+
+  @include viewport-at(sm) {
+    font-size: map-deep-get($breakpoint-map, sm, base-font);
+  }
+
+  @include viewport-at(xs) {
+    font-size: map-deep-get($breakpoint-map, xs, base-font);
+  }
+}
+
+a:link,
+a:active,
+a:visited {
+  color: $link-color;
+  text-decoration: none;
+}
+
+%h1,
+.h1 {
+  @extend %f1, %u-stack--lg !optional;
+}
+
+%h2,
+.h2 {
+  @extend %f2, %u-stack--md !optional;
+}
+
+%h3,
+.h3 {
+  @extend %f3, %u-stack--md !optional;
+}
+
+%h4,
+.h4 {
+  @extend %f4, %u-stack--md !optional;
+}
+
+%h5,
+.h5 {
+  @extend %f5, %u-stack--md !optional;
+}
+
+%h6,
+.h6 {
+  @extend %f6, %u-stack--sm !optional;
+}
+
+%p,
+.p {
+  @extend %f-md, %u-stack--md !optional;
+}
+
+%uppercase {
+  text-transform: uppercase;
+}
+
+%type--light {
+  font-weight: $font-weight--light;
+}
+
+%type--default {
+  font-weight: $font-weight--default;
+}
+
+%type--medium {
+  font-weight: $font-weight--medium;
+}
+
+%type--bold {
+  font-weight: $font-weight--bold;
+}
+
+ul,
+ol,
+dl {
+  @extend %f-md, %u-stack--md !optional;
+}
+
+dt {
+ @extend %type--medium;
+}
+
+dd {
+  margin: 0;
+}
+
+h1 {
+  @extend %h1;
+}
+
+h2 {
+  @extend %h2;
+}
+
+h3 {
+  @extend %h3;
+}
+
+h4 {
+  @extend %h4;
+}
+
+h5 {
+  @extend %h5;
+}
+
+h6 {
+  @extend %h6;
+}
+
+p {
+  @extend %p;
+}
+
+p:last-of-type {
+  margin-bottom: 0;
+}
