@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = "The Stitch Fix Weave Style Library"
   s.description = "Stitch Fix design, functionality, and pragmatism rolled into one."
   
-  s.files         = Dir["{lib, scss, js}/**/*"] + ["Rakefile", "README.rdoc"]
+  s.files         = Dir["{lib, scss, js}/**/*"] + ["Rakefile", "README.md"]
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib", "lib/stitch_fix"]
