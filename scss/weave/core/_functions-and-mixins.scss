@@ -1,0 +1,90 @@
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+// Shorthand for getting a color value from the color-map
+@function color($color) {
+  @if map-has-key($color-map, $color) {
+    @return map-get($color-map, $color);
+  }
+  @error "Invalid color name: `#{$color}`.";
+}
+
+// Shorthand for getting a space value from the space-map
+@function space($size) {
+  @if map-has-key($space-map, $size) {
+    @return map-get($space-map, $size);
+  }
+  @error "Invalid size name: `#{$size}`.";
+}
+
+// Shorthand for getting a type size or line-height from the type-map
+@function type($size, $param:"px") {
+  @if map-has-key($type-scale-map, $size) {
+    @return map-deep-get($type-scale-map, $size, $param);
+  }
+  @error "Invalid size name: `#{$size}`.";
+}
+
+// Load styles when breakpoint is EQUAL TO $breakpoint
+@mixin viewport-at($breakpoint) {
+  @if map-has-key($breakpoint-map, $breakpoint) {
+    $viewport-at__min-width: map-deep-get($breakpoint-map, $breakpoint, min-width);
+    $viewport-at__max-width: map-deep-get($breakpoint-map, $breakpoint, max-width);
+    @if ($viewport-at__max-width == null) {
+      @media screen and (min-width: $viewport-at__min-width) {
+        @content;
+      }
+    }
+    @else {
+      @media screen and (min-width: $viewport-at__min-width) and (max-width: $viewport-at__max-width) {
+        @content;
+      }
+    }
+  }
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+// Load styles when breakpoint is EQUAL TO AND SMALLER THAN $breakpoint
+@mixin viewport-equal-to-and-smaller-than($breakpoint) {
+  @if map-has-key($breakpoint-map, $breakpoint) {
+    $equal-to-and-smaller-than: map-deep-get($breakpoint-map, $breakpoint, max-width);
+    @if ($equal-to-and-smaller-than == null) {
+      @content;
+    }
+    @else {
+      @media screen and (max-width: $equal-to-and-smaller-than) {
+        @content;
+      }
+    }
+  }
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+// Load styles when breakpoint is EQUAL TO AND LARGER THAN $breakpoint
+@mixin viewport-equal-to-and-larger-than($breakpoint) {
+  @if map-has-key($breakpoint-map, $breakpoint) {
+    $equal-to-and-larger-than: map-deep-get($breakpoint-map, $breakpoint, min-width);
+    @if ($equal-to-and-larger-than == 0) {
+      @content;
+    }
+    @else {
+      @media screen and (min-width: $equal-to-and-larger-than) {
+        @content;
+      }
+    }
+  }
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}

@@ -1,0 +1,36 @@
+$tabs--border: 1px solid $border--default;
+$tabs--outset: space(sm) auto;
+
+$tab-label--outset:          space(sm) space(md);
+$tab-label--highlight:       $ui--accent;
+$tab-label--highlight--size: 3px;
+
+.#{$ns}-tabs {
+  @extend %flex-container;
+  border-bottom: $tabs--border;
+  margin: $tabs--outset;
+
+  &--centered {
+    @extend %flex-content-center;
+  }
+}
+
+a.#{$ns}-tabs__label,
+.#{$ns}-tabs__label {
+  @extend %type--default, %f-md;
+  text-transform: capitalize;
+  cursor: pointer;
+  padding: $tab-label--outset;
+  color:   $text--secondary;
+
+  &:hover {
+    color: $text--primary;
+  }
+
+  &.is-current {
+    @extend %type--medium;
+    color: $text--primary;
+    border-bottom: $tab-label--highlight--size $tab-label--highlight solid;
+    padding-bottom: calc(space(sm) - $tab-label--highlight--size);
+  }
+}

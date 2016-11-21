@@ -2,12 +2,12 @@ $grid--gutter-size: 2rem;
 $grid--max-columns: 12;
 $option--flex-grid-mobile-adjust: true;
 
-.#{$wv}-grid-row {
+.#{$ns}-grid-row {
   @extend %flex-container, %flex-wrap, %flex-content-start !optional;
 
   &--no-gutter {
 
-    & > .#{$wv}-grid-col,
+    & > .#{$ns}-grid-col,
     & > div {
       margin-left:  0 !important;
       margin-right: 0 !important;
@@ -15,7 +15,7 @@ $option--flex-grid-mobile-adjust: true;
     }
   }
 
-  & > .#{$wv}-grid-col,
+  & > .#{$ns}-grid-col,
   & > div {
     box-sizing: border-box;
     margin-left:  $grid--gutter-size / 2;
@@ -31,7 +31,7 @@ $option--flex-grid-mobile-adjust: true;
 }
 
 // Removes extra padding when padded by a container
-.#{$wv}-container .#{$wv}-grid-row {
+.#{$ns}-container .#{$ns}-grid-row {
   margin-left:  -($grid--gutter-size / 2);
   margin-right: -($grid--gutter-size / 2);
 }
@@ -41,8 +41,8 @@ $option--flex-grid-mobile-adjust: true;
    @for $j from $i through $grid--max-columns{
     $column-width: $i / $j;
 
-    %#{$wv}-grid-col--#{$i}-#{$j},
-    .#{$wv}-grid-col--#{$i}-#{$j} {
+    %#{$ns}-grid-col--#{$i}-#{$j},
+    .#{$ns}-grid-col--#{$i}-#{$j} {
       flex-basis: calc(#{($column-width * 100%)} - #{$grid--gutter-size});
       @if $option--flex-grid-mobile-adjust {
          @include viewport-at(xs){
@@ -60,8 +60,8 @@ $option--flex-grid-mobile-adjust: true;
        @for $j from $i through min($grid--max-columns, 6){
         $column-width: $i / $j;
 
-        %#{$wv}-grid-col--#{$i}-#{$j}-#{$breakpoint},
-        .#{$wv}-grid-col--#{$i}-#{$j}-#{$breakpoint} {
+        %#{$ns}-grid-col--#{$i}-#{$j}-#{$breakpoint},
+        .#{$ns}-grid-col--#{$i}-#{$j}-#{$breakpoint} {
           flex-basis: calc(#{$column-width * 100%} - #{$grid--gutter-size}) !important;
         }
       }
@@ -69,29 +69,29 @@ $option--flex-grid-mobile-adjust: true;
   }
 }
 
-%#{$wv}-grid--right,
-.#{$wv}-grid--right {
+%#{$ns}-grid--right,
+.#{$ns}-grid--right {
   @extend %flex-content-end !optional;
 }
 
-%#{$wv}-grid--left,
-.#{$wv}-grid--left {
+%#{$ns}-grid--left,
+.#{$ns}-grid--left {
   @extend %flex-content-start !optional;
 }
 
-%#{$wv}-grid--center,
-.#{$wv}-grid--center {
+%#{$ns}-grid--center,
+.#{$ns}-grid--center {
   @extend %flex-content-center !optional;
 }
 
-%#{$wv}-grid--reverse,
-.#{$wv}-grid--reverse {
+%#{$ns}-grid--reverse,
+.#{$ns}-grid--reverse {
   @extend %flex-reverse !optional;
 }
 // This will force the last child of the grid row to fill the remaining space.
 // Useful if you have an unknown number of children.
 
-%#{$wv}-grid--fill-space > div:last-of-type,
-.#{$wv}-grid--fill-space > div:last-of-type {
+%#{$ns}-grid--fill-space > div:last-of-type,
+.#{$ns}-grid--fill-space > div:last-of-type {
   flex: 1;
 }

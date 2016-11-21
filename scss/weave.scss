@@ -1,8 +1,6 @@
 @charset "utf-8";
 
 @import
-  "reset-css",
-  "variables",
-  "typography",
-  "utilities",
-  "modules";
+  "weave/core-index",
+  "weave/guidelines-index",
+  "weave/components-index";

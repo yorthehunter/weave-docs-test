@@ -1,0 +1,57 @@
+.#{$ns}-top-nav {
+  background: color(gray-lightest);
+  border-bottom: 1px solid color(gray-light);
+  @extend %f-md, %flex-container !optional;
+
+  &--logo {
+  }
+
+  &--divider {
+    width: 1px;
+    margin-top:    2rem;
+    margin-bottom: 2rem;
+    border-right: 1px solid color(gray-light);
+  }
+
+  &--site-nav {
+    @extend %flex-container !optional;
+  }
+
+  &--secondary-nav {
+    @extend %flex-container !optional;
+    margin-left: auto;
+  }
+}
+
+a.#{$ns}-nav-link,
+.#{$ns}-nav-link {
+  padding: 2rem;
+  position: relative;
+  color: $text--secondary;
+  @extend %type--default;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:hover {
+    color: $text--primary;
+  }
+
+  &.is-current {
+    @extend %type--medium;
+    color: color(mint-base);
+  }
+
+  &.has-dropdown {
+
+    &::after {
+      content: "▾";
+    }
+
+    &:hover {
+      .#{$ns}-dropdown {
+        opacity: 1.0;
+        pointer-events: auto;
+      }
+    }
+  }
+}

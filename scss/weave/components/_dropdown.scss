@@ -1,0 +1,48 @@
+$dropdown__inset: space(sm-in-em) space(md-in-em);
+
+$dropdown--bg: color(white);
+
+%dropdown--default {
+  // Dropdown reset values (especially important if using a list element as the html)
+  min-width: 20rem;
+  list-style: none;
+  opacity: 0;
+  white-space: nowrap;
+  position: absolute;
+  padding: 0;
+
+  // TODO: When implementing a js solution, remove this and come up with a better way.
+  // This is here to force the dropdown to stay hidden until the parent is hovered.
+  // This is only useful for css-only hover menus.
+  pointer-events: none;
+
+  transition: $transition--fade;
+  background-color: $dropdown--bg;
+  @extend %rounded, %elevated--1, %f-md !optional;
+
+  // adjusts dropdown to be below its parent, but has a clear code smell
+  // TODO: think of a better, more dynamic way to handle this
+  top: 6rem;
+}
+
+%dropdown--default__item {
+  @extend %type--default !optional;
+  padding: $dropdown__inset;
+  display: block;
+
+  &:hover {
+    background-color: color(gray-lightest);
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.#{$ns}-dropdown {
+  @extend %dropdown--default !optional;
+
+  &__item {
+    @extend %dropdown--default__item !optional;
+  }
+}

@@ -1,0 +1,108 @@
+$button--primary:   color(blue-base);
+$button--secondary: color(white);
+$button--flat:      transparent;
+$button--cta:       color(watermelon-base);
+
+$button--cta__text-color:       $text-on-dark;
+$button--primary__text-color:   $text-on-dark;
+$button--secondary__text-color: $text-on-light;
+$button--flat__text-color:      $link-color;
+
+$button--primary__active:   lighten($button--primary, $value-modifier--medium);
+$button--secondary__active: color(white);
+$button--flat__active:      color(gray-light);
+$button--cta__active:       lighten($button--cta, $value-modifier--medium);
+
+$button--flat__hover:       color(gray-lightest);
+
+$button__inset--sm: 0 space(md-in-em);
+$button__inset--md: space(xs-in-em) space(lg-in-em);
+$button__inset--lg: space(md-in-em) space(xl-in-em);
+
+$button__outset--sm: space(xs);
+$button__outset--md: space(xs);
+$button__outset--lg: space(xs);
+
+.#{$ns}-button {
+  @extend %uppercase, %rounded;
+  transition: $transition--bg, $transition--elevation;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  &:not(.is-disabled):not(.#{$ns}-button--flat):hover {
+    @extend %elevated--2;
+  }
+
+  &:active {
+    outline: none;
+  }
+
+  &--sm {
+    @extend %f-xs;
+    padding: $button__inset--sm;
+    margin-right: $button__outset--sm;
+  }
+
+  &--md {
+    @extend %f-sm;
+    padding: $button__inset--md;
+    margin-right: $button__outset--md;
+  }
+
+  &--lg {
+    @extend %f-sm;
+    padding: $button__inset--lg;
+    margin-right: $button__outset--lg;
+  }
+
+  &--cta {
+    @extend %elevated--1;
+    background-color: $button--cta;
+    color: $button--cta__text-color;
+
+    &:not(.is-disabled):active {
+      background-color: $button--cta__active;
+    }
+  }
+
+  &--primary {
+    @extend %elevated--1;
+    background-color: $button--primary;
+    color: $button--primary__text-color;
+
+    &:not(.is-disabled):active {
+      background-color: $button--primary__active;
+    }
+  }
+
+  &--secondary {
+    @extend %elevated--1;
+    background-color: $button--secondary;
+    color: $button--secondary__text-color;
+
+    &:not(.is-disabled):active {
+      background-color: $button--secondary__active;
+    }
+  }
+
+  &--flat {
+    @extend %elevated--0;
+    background-color: $button--flat;
+    color: $button--flat__text-color;
+
+    &:not(.is-disabled):hover {
+      background-color: $button--flat__hover;
+    }
+
+    &:not(.is-disabled):active {
+      background-color: $button--flat__active;
+    }
+  }
+
+  disabled,
+  &.is-disabled {
+    opacity: $disabled-opacity;
+    cursor: not-allowed;
+  }
+}

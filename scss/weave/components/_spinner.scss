@@ -1,0 +1,48 @@
+$spinner--color: $ui--accent;
+$spinner--lg: 8rem;
+$spinner--sm: 4rem;
+
+// Offset forces that very Material Design look
+$spinner--offset:   187;
+// Duration is the timing of the full rotation
+$spinner--duration: 1.8s;
+
+.#{$ns}-spinner {
+  animation: weave-rotator $spinner--duration linear infinite;
+
+  &--lg {
+    width:  $spinner--lg;
+    height: $spinner--lg;
+  }
+
+  &--sm {
+    width:  $spinner--sm;
+    height: $spinner--sm;
+  }
+
+  &__circular-path {
+    stroke-dasharray: $spinner--offset;
+    stroke-dashoffset: 0;
+    stroke: $spinner--color;
+    transform-origin: center;
+    animation:
+      weave-spinner-dash $spinner--duration ease-in-out infinite;
+  }
+}
+
+@keyframes weave-rotator {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(270deg); }
+}
+
+@keyframes weave-spinner-dash {
+ 0% { stroke-dashoffset: $spinner--offset; }
+ 50% {
+   stroke-dashoffset: $spinner--offset/4;
+   transform:rotate(135deg);
+ }
+ 100% {
+   stroke-dashoffset: $spinner--offset;
+   transform:rotate(450deg);
+ }
+}

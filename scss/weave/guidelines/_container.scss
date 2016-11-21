@@ -1,8 +1,8 @@
 // The container will "contain" content to the various defined breakpoints
 
-$container-padding: 1rem;
+$container-padding: space(md-in-em);
 
-.#{$wv}-container {
+.#{$ns}-container {
   @extend %clearfix !optional;
   margin-left:  auto;
   margin-right: auto;

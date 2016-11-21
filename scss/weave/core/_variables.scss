@@ -1,15 +1,8 @@
-@function map-deep-get($map, $keys...) {
-  @each $key in $keys {
-    $map: map-get($map, $key);
-  }
-  @return $map;
-}
-
 /* Global
 ------------------------------------------------------------------------------*/
 
 // Namespace variable
-$wv: "weave" !default;
+$ns: "weave" !default;
 
 $size-names: xxxl, xxl, xl, lg, md, sm, xs, xxs, xxxs, "none" !default;
 $common-size-names: xl, lg, md, sm, xs !default;
@@ -49,17 +42,25 @@ $color-map: (
   gray-base:     #727272,
   gray-light:    #D5D5D5,
   gray-lightest: #F7F7F7,
-  cyan:        #F05D61,
-  pink:        #00A19A,
-  amber:       #2F3237,
-  deep-orange: #FFCDD2,
-  lime:        #B2DFDB,
-  deep-purple: #2F3237,
+  cyan:        #00BCD4,
+  pink:        #F23C79,
+  amber:       #FFB939,
+  deep-orange: #FF7137,
+  lime:        #BFCD00,
+  deep-purple: #9575CD,
   black-75: rgba(0, 0, 0, 0.75),
   black-50: rgba(0, 0, 0, 0.50),
   black-25: rgba(0, 0, 0, 0.25),
   black-10: rgba(0, 0, 0, 0.10)
 );
+
+
+/* Value Modifiers
+------------------------------------------------------------------------------*/
+
+$value-modifier--heavy:   20% !default;
+$value-modifier--medium:  10% !default;
+$value-modifier--light:   5% !default;
 
 
 /* Viewports
@@ -94,109 +95,50 @@ $breakpoint-map: (
   )
 );
 
-@mixin viewport-at($breakpoint) {
-  @if map-has-key($breakpoint-map, $breakpoint) {
-    $viewport-at__min-width: map-deep-get($breakpoint-map, $breakpoint, min-width);
-    $viewport-at__max-width: map-deep-get($breakpoint-map, $breakpoint, max-width);
-    @if ($viewport-at__max-width == null) {
-      @media screen and (min-width: $viewport-at__min-width) {
-        @content;
-      }
-    }
-    @else {
-      @media screen and (min-width: $viewport-at__min-width) and (max-width: $viewport-at__max-width) {
-        @content;
-      }
-    }
-  }
-
-  @else {
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
-        + "Please make sure it is defined in `$breakpoints` map.";
-  }
-}
-
-@mixin viewport-equal-to-and-smaller-than($breakpoint) {
-  @if map-has-key($breakpoint-map, $breakpoint) {
-    $equal-to-and-smaller-than: map-deep-get($breakpoint-map, $breakpoint, max-width);
-    @if ($equal-to-and-smaller-than == null) {
-      @content;
-    }
-    @else {
-      @media screen and (max-width: $equal-to-and-smaller-than) {
-        @content;
-      }
-    }
-  }
-
-  @else {
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
-        + "Please make sure it is defined in `$breakpoints` map.";
-  }
-}
-
-@mixin viewport-equal-to-and-larger-than($breakpoint) {
-  @if map-has-key($breakpoint-map, $breakpoint) {
-    $equal-to-and-larger-than: map-deep-get($breakpoint-map, $breakpoint, min-width);
-    @if ($equal-to-and-larger-than == 0) {
-      @content;
-    }
-    @else {
-      @media screen and (min-width: $equal-to-and-larger-than) {
-        @content;
-      }
-    }
-  }
-
-  @else {
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
-        + "Please make sure it is defined in `$breakpoints` map.";
-  }
-}
-
 /* UI General
 ------------------------------------------------------------------------------*/
-$ui--accent:             color(mint-base);
-$ui--accent--under-text: color(mint-dark);
+$ui--accent:             color(mint-base) !default;
+$ui--accent--under-text: color(mint-dark) !default;
 
-$success--color: color(mint-base);
-$error--color:   color(watermelon-base);
-$warning--color: color(yellow-base);
+$success--color: color(mint-base) !default;
+$error--color:   color(watermelon-base) !default;
+$warning--color: color(yellow-base) !default;
 
-$field--success: color(mint-base);
-$field--error:   color(watermelon-base);
-$field--info:    color(mint-lightest);
-$field--warning: color(yellow-base);
+$field--success: color(mint-base) !default;
+$field--error:   color(watermelon-base) !default;
+$field--info:    color(mint-lightest) !default;
+$field--warning: color(yellow-base) !default;
+$field--default: color(gray-lightest) !default;
 
-$disabled-opacity: 0.5;
+$disabled-opacity: 0.5 !default;
 
-$border--default: color(gray-light);
-$rule--default:   color(gray-light);
-$border--error:   color(watermelon-base);
-$rule--error:     color(watermelon-base);
-$border--success: color(mint-base);
-$rule--success:   color(mint-base);
+$border--default: color(gray-light) !default;
+$rule--default:   color(gray-light) !default;
+$border--error:   color(watermelon-base) !default;
+$rule--error:     color(watermelon-base) !default;
+$border--success: color(mint-base) !default;
+$rule--success:   color(mint-base) !default;
 
-$rounded--default:        2px;
-$rounded--perfect-circle: 100%;
-$rounded--perfect-pill:   100vw;
+$rounded--default:        2px !default;
+$rounded--perfect-circle: 100% !default;
+$rounded--perfect-pill:   100vw !default;
 
 /* Typography
 ------------------------------------------------------------------------------*/
-$text--primary:   color(gray-dark);
-$text--secondary: color(gray-base);
-$text--light:     color(white);
-$text-on-dark:    color(white);
-$text-on-light:   color(black);
-$text--error:     color(watermelon-base);
-$text--success:   color(mint-dark);
-$text--warning:   color(yellow-base);
+$text--primary:   color(gray-dark) !default;
+$text--secondary: color(gray-base) !default;
+$text--light:     color(white) !default;
+$text-on-dark:    color(white) !default;
+$text-on-light:   color(black) !default;
+$text--error:     color(watermelon-base) !default;
+$text--success:   color(mint-dark) !default;
+$text--warning:   color(yellow-base) !default;
 
-$font-face--default:   'Whitney SSm';
-$font-weight--default: "normal";
-$font-weight--light:   "normal";
-$font-weight--medium:  500;
-$font-weight--bold:    "bold";
+$font-face--default:   'Whitney SSm' !default;
+$font-weight--default: normal !default;
+$font-weight--light:   normal !default;
+$font-weight--medium:  500 !default;
+$font-weight--bold:    bold !default;
 
 $type-scale-map: (
   xxl: (
@@ -307,18 +249,21 @@ $elevation-map: (
 );
 
 // Transitions
-$transition__speed--default: 0.4s;
-$transition__speed--fast:    0.2s;
-$transition__speed--slow:    0.8s;
-$transition__easing--default: ease-in-out;
-$transition__easing--complex: cubic-bezier(0.455, 0.03, 0.515, 0.955);
-$transition--elevation: box-shadow $transition__speed--fast $transition__easing--default;
-$transition--bg:        background-color $transition__speed--fast $transition__easing--default;
-$transition--fade:      opacity $transition__speed--fast $transition__easing--default;
-$transition--all:       all $transition__speed--fast $transition__easing--default;
+$transition__speed--default: 0.4s !default;
+$transition__speed--fast:    0.2s !default;
+$transition__speed--slow:    0.8s !default;
+
+$transition__easing--default: ease-in-out !default;
+$transition__easing--complex: cubic-bezier(0.455, 0.03, 0.515, 0.955) !default;
+
+$transition--width:     width            $transition__speed--fast $transition__easing--default !default;
+$transition--elevation: box-shadow       $transition__speed--fast $transition__easing--default !default;
+$transition--bg:        background-color $transition__speed--fast $transition__easing--default !default;
+$transition--fade:      opacity          $transition__speed--fast $transition__easing--default !default;
+$transition--all:       all $transition__speed--fast $transition__easing--default !default;
 
 // Links
-$link-color: color(blue-base);
+$link-color: color(blue-base) !default;
 
 // // Forms
 // $form--label__text-color:         $text--secondary;

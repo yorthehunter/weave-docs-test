@@ -178,15 +178,20 @@
   }
 }
 
-// Basic Setup
+// Sets us up to have a standardized rem base (in our case, 8px)
+// We make use of this rem standard to keep most of our elements on an 8px grid
+// We make exceptions, of course, but generally keeping to that grid gives us a
+// cleaner layout overall.
 html {
   font-size: $base-visual-rhythm;
 }
 
+// Typography basic setup
 body {
   font-family: $font-face--default, helvetica, sans-serif;
   color: $text--primary;
 
+  // Set a base font size for each of the breakpoints
   @include viewport-at(xl) {
     font-size: map-deep-get($breakpoint-map, xl, base-font);
   }
@@ -254,6 +259,10 @@ a:visited {
   text-transform: uppercase;
 }
 
+%type--light {
+  font-weight: $font-weight--light;
+}
+
 %type--default {
   font-weight: $font-weight--default;
 }
@@ -267,8 +276,17 @@ a:visited {
 }
 
 ul,
-ol {
+ol,
+dl {
   @extend %f-md, %u-stack--md !optional;
+}
+
+dt {
+ @extend %type--medium;
+}
+
+dd {
+  margin: 0;
 }
 
 h1 {
@@ -297,4 +315,8 @@ h6 {
 
 p {
   @extend %p;
+}
+
+p:last-of-type {
+  margin-bottom: 0;
 }
