@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require 'stitch_fix/weave/version'
 
 Gem::Specification.new do |s|
-  s.name        = "weave"
+  s.name        = "stitchfix-weave"
   s.version     = StitchFix::Weave::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Stitch Fix Engineering']
@@ -15,8 +15,11 @@ Gem::Specification.new do |s|
   s.files         = Dir["{lib, scss, js}/**/*"] + ["Rakefile", "README.rdoc"]
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib, scss"]
+  s.require_paths = ["lib", "lib/stitch_fix"]
+
+  s.add_runtime_dependency "sass"
   s.add_development_dependency("stitchfix-y")
   s.add_development_dependency("rake")
   s.add_development_dependency("rspec")
 end
+

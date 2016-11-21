@@ -1,4 +1,3 @@
-# Require other files as you add them
 require 'stitch_fix/weave/version'
 
 module StitchFix
@@ -6,18 +5,19 @@ module StitchFix
     class << self
       # Inspired by Kaminari
       def load!
-        puts 'whaaaaaaaaaaaaat'
+        puts "heLLooooooooo"
         if rails?
           register_rails_engine
+        elsif sprockets?
+          register_sprockets
         end
 
         configure_sass
-        register_sprockets
       end
 
       # Paths
       def gem_path
-        @gem_path ||= File.expand_path '..', File.dirname(__FILE__)
+        @gem_path ||= File.expand_path '../..', File.dirname(__FILE__)
       end
 
       def stylesheets_path
@@ -57,7 +57,7 @@ module StitchFix
       end
 
       def register_rails_engine
-        require 'weave/engine'
+        require 'stitch_fix/weave/engine'
       end
 
       def register_sprockets
