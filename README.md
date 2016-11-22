@@ -20,7 +20,7 @@ source "https://gem.fury.io/me/" do
   gem 'stitchfix-weave', :require => 'stitch_fix/weave'
 end
 ```
-Then in your `{my_application}/app/assets/stylesheets/applicaiton.scss` file you can add:
+Then in your `{my_application}/app/assets/stylesheets/application.scss` file you can add:
 ```ruby
 @import "weave";
 ```
